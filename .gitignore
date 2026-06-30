@@ -1,0 +1,50 @@
+# =========================================================================
+# 🛑 SEGURANÇA: Nunca subir chaves, senhas ou variáveis de ambiente
+# =========================================================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+application.properties
+application.yml
+# (Dica: suba apenas um "application.properties.example" sem as senhas reais)
+
+# =========================================================================
+# ☕ JAVA / SPRING BOOT / MAVEN
+# =========================================================================
+target/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.mars
+*.db
+
+# =========================================================================
+# 🌐 JAVASCRIPT / NODE / FRONTEND (React ou Vue)
+# =========================================================================
+node_modules/
+/dist
+/build
+.npm
+.eslintcache
+.vite
+
+# =========================================================================
+# 💻 SISTEMA OPERACIONAL E IDEs (Eclipse, IntelliJ, VS Code)
+# =========================================================================
+# Arquivos do Linux (relevante para o CachyOS/Arch)
+.directory
+.Trash-*
+
+# Arquivos do Windows e Mac
+Thumbs.db
+.DS_Store
+
+# Configurações locais de editores
+.idea/
+*.iml
+.vscode/
+.settings/
+.classpath
+.project
+.factorypath
