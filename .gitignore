@@ -1,23 +1,56 @@
+# =========================================================================
+# 🛑 SEGURANÇA: Nunca subir chaves, senhas ou variáveis de ambiente
+# =========================================================================
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+application.properties
+application.yml
+
+# =========================================================================
+# ☕ JAVA / SPRING BOOT / MAVEN
+# =========================================================================
 HELP.md
 target/
-.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+*.class
+*.mars
+*.db
 
-### STS ###
+# =========================================================================
+# 🌐 JAVASCRIPT / NODE / FRONTEND
+# =========================================================================
+node_modules/
+/dist/
+/build/
+.npm
+.eslintcache
+.vite
+
+# =========================================================================
+# 💻 IDEs
+# =========================================================================
+
+### Spring Tool Suite ###
 .apt_generated
-.classpath
-.factorypath
-.project
-.settings
 .springBeans
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
-*.iws
+.idea/
 *.iml
+*.iws
 *.ipr
+
+### Eclipse ###
+.settings/
+.classpath
+.project
+.factorypath
 
 ### NetBeans ###
 /nbproject/private/
@@ -31,3 +64,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# =========================================================================
+# 🖥️ SISTEMA OPERACIONAL
+# =========================================================================
+.directory
+.Trash-*
+Thumbs.db
+.DS_Store
