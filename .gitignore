@@ -8,43 +8,67 @@
 *.key
 application.properties
 application.yml
-# (Dica: suba apenas um "application.properties.example" sem as senhas reais)
 
 # =========================================================================
 # ☕ JAVA / SPRING BOOT / MAVEN
 # =========================================================================
+HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
 *.class
 *.mars
 *.db
 
 # =========================================================================
-# 🌐 JAVASCRIPT / NODE / FRONTEND (React ou Vue)
+# 🌐 JAVASCRIPT / NODE / FRONTEND
 # =========================================================================
 node_modules/
-/dist
-/build
+/dist/
+/build/
 .npm
 .eslintcache
 .vite
 
 # =========================================================================
-# 💻 SISTEMA OPERACIONAL E IDEs (Eclipse, IntelliJ, VS Code)
+# 💻 IDEs
 # =========================================================================
-# Arquivos do Linux (relevante para o CachyOS/Arch)
-.directory
-.Trash-*
 
-# Arquivos do Windows e Mac
-Thumbs.db
-.DS_Store
+### Spring Tool Suite ###
+.apt_generated
+.springBeans
+.sts4-cache
 
-# Configurações locais de editores
+### IntelliJ IDEA ###
 .idea/
 *.iml
-.vscode/
+*.iws
+*.ipr
+
+### Eclipse ###
 .settings/
 .classpath
 .project
 .factorypath
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+# =========================================================================
+# 🖥️ SISTEMA OPERACIONAL
+# =========================================================================
+.directory
+.Trash-*
+Thumbs.db
+.DS_Store
