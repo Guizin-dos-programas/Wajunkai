@@ -3,6 +3,5 @@ CREATE TABLE tb_usuario (
     nome VARCHAR(100) NOT NULL,
     login VARCHAR(100) NOT NULL UNIQUE,
     senha VARCHAR(255) NOT NULL,
-    role_perfil VARCHAR(20) NOT NULL,
     data_cadastro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
