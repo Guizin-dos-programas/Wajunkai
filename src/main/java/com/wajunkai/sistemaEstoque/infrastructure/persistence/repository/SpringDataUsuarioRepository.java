@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface SpringDataUsuarioRepository extends JpaRepository<UsuarioJpaEntity, String> {
+public interface SpringDataUsuarioRepository extends JpaRepository<UsuarioJpaEntity, Long> {
 
     Optional<UsuarioJpaEntity> findByLogin(String login);
 

@@ -8,6 +8,7 @@ import com.wajunkai.sistemaEstoque.domain.ports.outbound.PasswordEncoderPort;
 import com.wajunkai.sistemaEstoque.domain.ports.outbound.UsuarioRepositoryPort;
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
 
+
 public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
 
         private final UsuarioRepositoryPort usuarioRepository;
@@ -35,4 +36,6 @@ public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
 
             return usuarioRepository.salvar(novoUsuario);
         }
+
+
 }

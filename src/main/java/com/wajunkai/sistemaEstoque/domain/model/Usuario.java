@@ -41,4 +41,17 @@ public class Usuario {
     public TipoUsuario getTipoUsuario() { return tipoUsuario; }
     public boolean isAtivo() { return ativo; }
     public LocalDateTime getDataCadastro() { return dataCadastro; }
+
+    public void atualizarDadosPessoais(String novoNome, String novaSenhaCriptografada) {
+        if (novoNome != null && !novoNome.isBlank()) {
+            this.nome = novoNome;
+        }
+        if (novaSenhaCriptografada != null && !novaSenhaCriptografada.isBlank()) {
+            this.senha = novaSenhaCriptografada;
+        }
+    }
+
+    public void desativarUsuario(){
+        this.ativo = false;
+    }
 }
