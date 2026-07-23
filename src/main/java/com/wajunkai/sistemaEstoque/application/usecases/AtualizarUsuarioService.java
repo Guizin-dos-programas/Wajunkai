@@ -2,9 +2,9 @@ package com.wajunkai.sistemaEstoque.application.usecases;
 
 import com.wajunkai.sistemaEstoque.domain.exceptions.UsuarioNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
-import com.wajunkai.sistemaEstoque.domain.ports.inbound.AtualizarUsuarioUsecase;
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.PasswordEncoderPort;
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.UsuarioRepositoryPort;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.AtualizarUsuarioUsecase;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 
 public class AtualizarUsuarioService implements AtualizarUsuarioUsecase {
 

@@ -2,8 +2,8 @@ package com.wajunkai.sistemaEstoque.application.usecases;
 
 import com.wajunkai.sistemaEstoque.application.dtos.PaginaResultado;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
-import com.wajunkai.sistemaEstoque.domain.ports.inbound.BuscarUsuariosUsecase;
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.UsuarioRepositoryPort;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.BuscarUsuariosUsecase;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 
 public class BuscarUsuariosService implements BuscarUsuariosUsecase {
 

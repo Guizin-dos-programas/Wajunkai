@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.domain.ports.outbound;
+package com.wajunkai.sistemaEstoque.application.ports.outbound;
 
 public interface PasswordEncoderPort {
 

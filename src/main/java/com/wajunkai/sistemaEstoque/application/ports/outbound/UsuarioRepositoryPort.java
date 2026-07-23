@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.domain.ports.outbound;
+package com.wajunkai.sistemaEstoque.application.ports.outbound;
 
 import com.wajunkai.sistemaEstoque.application.dtos.PaginaResultado;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;

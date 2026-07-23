@@ -2,7 +2,7 @@ package com.wajunkai.sistemaEstoque.infrastructure.persistence.adapter;
 
 import com.wajunkai.sistemaEstoque.application.dtos.PaginaResultado;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.UsuarioRepositoryPort;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.entity.UsuarioJpaEntity;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.mapper.UsuarioMapper;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.repository.SpringDataUsuarioRepository;

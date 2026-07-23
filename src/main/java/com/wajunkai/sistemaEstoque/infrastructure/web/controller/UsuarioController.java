@@ -1,13 +1,12 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.controller;
 
 import com.wajunkai.sistemaEstoque.application.dtos.PaginaResultado;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.*;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
-import com.wajunkai.sistemaEstoque.domain.ports.inbound.*;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.AtualizarUsuarioRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.CadastrarUsuarioRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.UsuarioResponse;
 import jakarta.validation.Valid;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;

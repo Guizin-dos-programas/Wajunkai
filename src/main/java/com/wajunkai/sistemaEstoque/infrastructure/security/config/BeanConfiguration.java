@@ -1,9 +1,9 @@
 package com.wajunkai.sistemaEstoque.infrastructure.security.config;
 
+import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.*;
 import com.wajunkai.sistemaEstoque.application.usecases.*;
-import com.wajunkai.sistemaEstoque.domain.ports.inbound.*;
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.PasswordEncoderPort;
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.UsuarioRepositoryPort;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

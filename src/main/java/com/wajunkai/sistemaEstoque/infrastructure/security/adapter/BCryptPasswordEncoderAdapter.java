@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.infrastructure.security.adapter;
 
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.PasswordEncoderPort;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 

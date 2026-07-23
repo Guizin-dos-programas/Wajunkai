@@ -3,8 +3,8 @@ package com.wajunkai.sistemaEstoque.application.usecases;
 import com.wajunkai.sistemaEstoque.domain.exceptions.LoginException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 
-import com.wajunkai.sistemaEstoque.domain.ports.inbound.BuscarUsuarioPorLoginUsecase;
-import com.wajunkai.sistemaEstoque.domain.ports.outbound.UsuarioRepositoryPort;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.BuscarUsuarioPorLoginUsecase;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 
 public class BuscarUsuarioPorLoginService implements BuscarUsuarioPorLoginUsecase {
 
