@@ -22,7 +22,7 @@ O projeto é estruturado separando estritamente a regra de negócio do ecossiste
 * **Java 21** (Uso de Records, Pattern Matching)
 * **Spring Boot 3** (Web, Security, Data JPA)
 * **Jakarta Validation** (Validação de entrada com DTOs)
-* **MariaDB** (Banco de dados relacional)
+* **Postgresql** (Banco de dados relacional)
 * **BCrypt** (Criptografia de senhas)
 * **Maven** (Gerenciamento de dependências)
 
