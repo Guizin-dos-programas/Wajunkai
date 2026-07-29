@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.infrastructure.persistence.entity;
 
-import com.wajunkai.sistemaEstoque.domain.enums.TipoUsuario;
+import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

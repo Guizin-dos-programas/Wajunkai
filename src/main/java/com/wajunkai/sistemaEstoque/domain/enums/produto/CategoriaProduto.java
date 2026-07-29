@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.domain.enums;
+package com.wajunkai.sistemaEstoque.domain.enums.produto;
 
 public enum CategoriaProduto {
 

@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.application.dtos;
+package com.wajunkai.sistemaEstoque.application.dtos.usuario;
 
 import java.util.List;
 

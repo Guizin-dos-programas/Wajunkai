@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.domain.model;
 
-import com.wajunkai.sistemaEstoque.domain.enums.TipoUsuario;
+import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
 
 import java.time.LocalDateTime;

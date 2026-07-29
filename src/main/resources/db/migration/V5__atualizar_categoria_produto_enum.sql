@@ -1,4 +1,4 @@
-DROP TYPE categoria_enum;
+DROP TYPE categoria_enum CASCADE;
 
 CREATE TYPE categoria_enum AS ENUM (
     'ALIMENTACAO',

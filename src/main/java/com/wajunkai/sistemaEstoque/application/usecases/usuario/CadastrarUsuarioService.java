@@ -1,13 +1,12 @@
-package com.wajunkai.sistemaEstoque.application.usecases;
+package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
-import com.wajunkai.sistemaEstoque.domain.enums.TipoUsuario;
+import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
 import com.wajunkai.sistemaEstoque.domain.exceptions.UsuarioJaCadastradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.CadastrarUsuarioUseCase;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
-
 
 public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
 

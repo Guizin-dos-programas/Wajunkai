@@ -14,28 +14,27 @@ public class ProdutoMapper {
         return new ProdutoJpaEntity(
                 domain.getId(),
                 domain.getNome(),
-                domain.getQuantidadeAtual(),
-                domain.getEstoqueMinimo(),
+                domain.getQuantidadeAtual().valor(),
+                domain.getEstoqueMinimo().valor(),
                 domain.getUnidadeMedidaProduto(),
                 domain.getCategoriaProduto(),
-                domain.getDataValidade()
+                domain.getDataValidade(),
+                domain.getSituacao()
         );
     }
 
     public Produto toDomain(ProdutoJpaEntity entity) {
         if (entity == null) return null;
 
-        QuantidadeEstoque quantidadeAtual = entity.getQuantidadeAtual();
-        QuantidadeEstoque estoqueMinimo = entity.getEstoqueMinimo();
-
         return new Produto(
                 entity.getId(),
                 entity.getNome(),
-                quantidadeAtual,
-                estoqueMinimo,
+                new QuantidadeEstoque(entity.getQuantidadeAtual()),
+                new QuantidadeEstoque(entity.getEstoqueMinimo()),
                 entity.getUnidadeMedidaProduto(),
                 entity.getCategoriaProduto(),
-                entity.getDataValidade()
+                entity.getDataValidade(),
+                entity.getSituacao()
         );
     }
 

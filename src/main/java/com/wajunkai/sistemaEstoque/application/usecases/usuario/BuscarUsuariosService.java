@@ -1,6 +1,6 @@
-package com.wajunkai.sistemaEstoque.application.usecases;
+package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
-import com.wajunkai.sistemaEstoque.application.dtos.PaginaResultado;
+import com.wajunkai.sistemaEstoque.application.dtos.usuario.PaginaResultado;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.BuscarUsuariosUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;

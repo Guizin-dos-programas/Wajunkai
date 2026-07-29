@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.domain.valueObject;
 
-import com.wajunkai.sistemaEstoque.domain.enums.UnidadeMedidaProduto;
+import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
 import com.wajunkai.sistemaEstoque.domain.exceptions.QuantidadeNegativaException;
 import com.wajunkai.sistemaEstoque.domain.exceptions.UnidadeMedidaException;
 

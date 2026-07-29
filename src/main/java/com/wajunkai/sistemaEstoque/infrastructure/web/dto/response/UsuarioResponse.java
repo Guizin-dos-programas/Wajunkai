@@ -1,12 +1,12 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.dto.response;
 
-import com.wajunkai.sistemaEstoque.domain.enums.TipoUsuario;
+import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 
 import java.time.LocalDateTime;
 
 public record UsuarioResponse(
-        String id,
+        Long id,
         String nome,
         String login,
         TipoUsuario tipoUsuario,
@@ -15,7 +15,7 @@ public record UsuarioResponse(
 ) {
     public static UsuarioResponse fromDomain(Usuario usuario) {
         return new UsuarioResponse(
-                usuario.getId().toString(),
+                usuario.getId(),
                 usuario.getNome(),
                 usuario.getLogin().valor(),
                 usuario.getTipoUsuario(),

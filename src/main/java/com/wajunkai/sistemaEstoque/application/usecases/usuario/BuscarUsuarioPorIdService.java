@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.application.usecases;
+package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
 import com.wajunkai.sistemaEstoque.domain.exceptions.UsuarioNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;

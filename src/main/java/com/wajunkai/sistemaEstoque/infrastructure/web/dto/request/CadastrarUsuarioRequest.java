@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request;
 
-import com.wajunkai.sistemaEstoque.domain.enums.TipoUsuario;
+import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

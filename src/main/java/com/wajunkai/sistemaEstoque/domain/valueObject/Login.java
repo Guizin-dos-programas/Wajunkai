@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.domain.valueObject;
 
-import com.wajunkai.sistemaEstoque.domain.enums.TipoLogin;
+import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoLogin;
 import com.wajunkai.sistemaEstoque.domain.exceptions.CPFFormatoInvalidoException;
 import com.wajunkai.sistemaEstoque.domain.exceptions.EmailFormatoInvalidoException;
 import com.wajunkai.sistemaEstoque.domain.exceptions.LoginException;
