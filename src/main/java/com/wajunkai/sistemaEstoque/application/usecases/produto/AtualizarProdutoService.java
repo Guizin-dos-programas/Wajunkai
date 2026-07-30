@@ -4,8 +4,8 @@ import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.AtualizarPr
 import com.wajunkai.sistemaEstoque.application.ports.outbound.ProdutoRepositoryPort;
 import com.wajunkai.sistemaEstoque.domain.enums.produto.CategoriaProduto;
 import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
-import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradaException;
-import com.wajunkai.sistemaEstoque.domain.exceptions.ProdutoJaCadastradoException;
+import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeJaCadastradaException;
+import com.wajunkai.sistemaEstoque.domain.exceptions.RegraDeNegocioException;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 
@@ -23,11 +23,11 @@ public class AtualizarProdutoService implements AtualizarProdutoUsecase {
     @Override
     public Produto executar(Long id, String nome, BigDecimal estoqueMinimo, UnidadeMedidaProduto unidadeMedida, CategoriaProduto categoria, LocalDate dataValidade) {
         Produto produtoExistente = produtoRepositoryPort.buscarPorId(id).orElseThrow(
-                ()-> new EntidadeNaoEncontradaException("Entidade não encontrada"));
+                ()-> new RegraDeNegocioException("Entidade não encontrada"));
 
         if (!produtoExistente.getNome().equalsIgnoreCase(nome)
                 && produtoRepositoryPort.existePorNome(nome)) {
-            throw new ProdutoJaCadastradoException("Já existe outro produto cadastrado com o nome: " + nome);
+            throw new EntidadeJaCadastradaException("Já existe outro produto cadastrado com o nome: " + nome);
         }
 
         QuantidadeEstoque novoEstoqueMinimo = new QuantidadeEstoque(estoqueMinimo);

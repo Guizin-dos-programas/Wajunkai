@@ -1,6 +1,7 @@
 package com.wajunkai.sistemaEstoque.infrastructure.security.adapter;
 
 import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
+import com.wajunkai.sistemaEstoque.domain.exceptions.RegraDeNegocioException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +17,7 @@ public class BCryptPasswordEncoderAdapter implements PasswordEncoderPort {
     @Override
     public String encode(String senhaLimpa) {
         if (senhaLimpa == null || senhaLimpa.isBlank()) {
-            throw new IllegalArgumentException("A senha não pode ser nula ou vazia.");
+            throw new RegraDeNegocioException("A senha não pode ser nula ou vazia.");
         }
         return springPasswordEncoder.encode(senhaLimpa);
     }

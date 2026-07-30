@@ -2,6 +2,7 @@ package com.wajunkai.sistemaEstoque.application.usecases.produto;
 
 import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.DesativarProdutoUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.ProdutoRepositoryPort;
+import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 
 public class DesativarProdutoService implements DesativarProdutoUsecase {
@@ -15,6 +16,11 @@ public class DesativarProdutoService implements DesativarProdutoUsecase {
 
     @Override
     public Produto executar(Long id) {
-        return null;
+        Produto produto = produtoRepositoryPort.buscarPorId(id)
+                .orElseThrow(()-> new EntidadeNaoEncontradoException("Produto não encontrado exception"));
+
+        produto.inativarProduto();
+
+        return produtoRepositoryPort.salvar(produto);
     }
 }

@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
-import com.wajunkai.sistemaEstoque.domain.exceptions.LoginException;
+import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.BuscarUsuarioPorLoginUsecase;
@@ -18,6 +18,6 @@ public class BuscarUsuarioPorLoginService implements BuscarUsuarioPorLoginUsecas
     @Override
     public Usuario executar(String login) {
         return usuarioRepositoryPort.buscarPorLogin(login)
-                .orElseThrow(() -> new LoginException("Usuário não encontrado com o login: " + login));
+                .orElseThrow(() -> new EntidadeNaoEncontradoException("Usuário não encontrado com o login: " + login));
     }
 }

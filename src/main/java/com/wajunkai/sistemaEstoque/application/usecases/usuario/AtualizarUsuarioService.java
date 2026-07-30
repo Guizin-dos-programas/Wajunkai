@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
-import com.wajunkai.sistemaEstoque.domain.exceptions.UsuarioNaoEncontradoException;
+import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.AtualizarUsuarioUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
@@ -20,7 +20,7 @@ public class AtualizarUsuarioService implements AtualizarUsuarioUsecase {
     @Override
     public Usuario executar(Long id, String nomeAtualizado, String novaSenha) {
         Usuario usuario = usuarioRepositoryPort.buscarPorId(id).orElseThrow(
-                ()-> new UsuarioNaoEncontradoException("Usuário não encontrado")
+                ()-> new EntidadeNaoEncontradoException("Usuário não encontrado")
         );
 
         String senhaCriptografada = null;

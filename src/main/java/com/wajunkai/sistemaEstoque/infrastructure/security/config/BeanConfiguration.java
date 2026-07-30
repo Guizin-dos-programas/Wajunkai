@@ -1,17 +1,14 @@
 package com.wajunkai.sistemaEstoque.infrastructure.security.config;
 
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.AtualizarProdutoUsecase;
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.BuscarPorIdUsecase;
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.CadastrarProdutoUsecase;
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.ListarProdutosUsecase;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.RegistrarMovimentacaoUsecase;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.*;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.*;
+import com.wajunkai.sistemaEstoque.application.ports.outbound.MovimentacaoRepositoryPort;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.ProdutoRepositoryPort;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
-import com.wajunkai.sistemaEstoque.application.usecases.produto.AtualizarProdutoService;
-import com.wajunkai.sistemaEstoque.application.usecases.produto.BuscarPorIdService;
-import com.wajunkai.sistemaEstoque.application.usecases.produto.CadastrarProdutoService;
-import com.wajunkai.sistemaEstoque.application.usecases.produto.ListarProdutosService;
+import com.wajunkai.sistemaEstoque.application.usecases.movimentacao.RegistrarMovimentacaoService;
+import com.wajunkai.sistemaEstoque.application.usecases.produto.*;
 import com.wajunkai.sistemaEstoque.application.usecases.usuario.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -83,5 +80,27 @@ public class BeanConfiguration {
             ProdutoRepositoryPort produtoRepositoryPort
     ){
         return new ListarProdutosService(produtoRepositoryPort);
+    }
+
+    @Bean
+    DesativarProdutoUsecase desativarProdutoUsecase(
+            ProdutoRepositoryPort produtoRepositoryPort
+    ){
+        return new DesativarProdutoService(produtoRepositoryPort);
+    }
+
+    @Bean
+    AtivarProdutoUsecase ativarProdutoUsecase(
+            ProdutoRepositoryPort produtoRepositoryPort
+    ){
+        return new AtivarProdutoService(produtoRepositoryPort);
+    }
+
+    @Bean
+    RegistrarMovimentacaoUsecase registrarMovimentacaoUsecase(
+            MovimentacaoRepositoryPort movimentacaoRepositoryPort,
+            ProdutoRepositoryPort produtoRepositoryPort
+    ){
+        return new RegistrarMovimentacaoService(movimentacaoRepositoryPort, produtoRepositoryPort);
     }
 }

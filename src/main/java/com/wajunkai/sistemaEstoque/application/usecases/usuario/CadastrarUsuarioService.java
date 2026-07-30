@@ -1,7 +1,7 @@
 package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
 import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
-import com.wajunkai.sistemaEstoque.domain.exceptions.UsuarioJaCadastradoException;
+import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeJaCadastradaException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.CadastrarUsuarioUseCase;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
@@ -24,7 +24,7 @@ public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
             Login loginVO = new Login(loginBruto, null);
 
             if (usuarioRepository.existePorLogin(loginVO.valor())) {
-                throw new UsuarioJaCadastradoException(
+                throw new EntidadeJaCadastradaException(
                         "Identificador informado já está em uso"
                 );
             }

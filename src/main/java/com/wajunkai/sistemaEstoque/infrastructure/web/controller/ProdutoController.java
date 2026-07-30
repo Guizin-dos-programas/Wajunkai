@@ -2,10 +2,7 @@ package com.wajunkai.sistemaEstoque.infrastructure.web.controller;
 
 import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaQuery;
 import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaResultado;
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.AtualizarProdutoUsecase;
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.BuscarPorIdUsecase;
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.CadastrarProdutoUsecase;
-import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.ListarProdutosUsecase;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.*;
 import com.wajunkai.sistemaEstoque.domain.enums.produto.Situacao;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.AtualizarProdutoRequest;
@@ -27,12 +24,16 @@ public class ProdutoController {
     private final AtualizarProdutoUsecase atualizarProdutoUsecase;
     private final BuscarPorIdUsecase buscarPorIdUsecase;
     private final ListarProdutosUsecase listarProdutosUsecase;
+    private final DesativarProdutoUsecase desativarProdutoUsecase;
+    private final AtivarProdutoUsecase ativarProdutoUsecase;
 
-    public ProdutoController(CadastrarProdutoUsecase cadastrarProdutoUsecase, AtualizarProdutoUsecase atualizarProdutoUsecase, BuscarPorIdUsecase buscarPorIdUsecase, ListarProdutosUsecase listarProdutosUsecase) {
+    public ProdutoController(CadastrarProdutoUsecase cadastrarProdutoUsecase, AtualizarProdutoUsecase atualizarProdutoUsecase, BuscarPorIdUsecase buscarPorIdUsecase, ListarProdutosUsecase listarProdutosUsecase, DesativarProdutoUsecase desativarProdutoUsecase, AtivarProdutoUsecase ativarProdutoUsecase) {
         this.cadastrarProdutoUsecase = cadastrarProdutoUsecase;
         this.atualizarProdutoUsecase = atualizarProdutoUsecase;
         this.buscarPorIdUsecase = buscarPorIdUsecase;
         this.listarProdutosUsecase = listarProdutosUsecase;
+        this.desativarProdutoUsecase = desativarProdutoUsecase;
+        this.ativarProdutoUsecase = ativarProdutoUsecase;
     }
 
     @PostMapping
@@ -100,5 +101,17 @@ public class ProdutoController {
         );
 
         return ResponseEntity.ok(responsePaginaResultado);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> desativarProduto(@PathVariable Long id){
+        desativarProdutoUsecase.executar(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/ativar")
+    public ResponseEntity<Void> ativarProduto(@PathVariable Long id){
+        ativarProdutoUsecase.executar(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -5,7 +5,7 @@ import com.wajunkai.sistemaEstoque.application.ports.outbound.ProdutoRepositoryP
 import com.wajunkai.sistemaEstoque.domain.enums.produto.CategoriaProduto;
 import com.wajunkai.sistemaEstoque.domain.enums.produto.Situacao;
 import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
-import com.wajunkai.sistemaEstoque.domain.exceptions.ProdutoJaCadastradoException;
+import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeJaCadastradaException;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 
@@ -24,7 +24,7 @@ public class CadastrarProdutoService implements CadastrarProdutoUsecase {
     public Produto executar(String nome, BigDecimal quantidadeAtual, BigDecimal estoqueMinimo, UnidadeMedidaProduto unidadeMedidaProduto, CategoriaProduto categoria, LocalDate dataValidade, Situacao situacao) {
 
         if(produtoRepositoryPort.existePorNome(nome)){
-            throw new ProdutoJaCadastradoException("Produto: " + nome + " já cadastrado!");
+            throw new EntidadeJaCadastradaException("Produto: " + nome + " já cadastrado!");
         }
 
         QuantidadeEstoque estoqueMinimoVO = new QuantidadeEstoque(estoqueMinimo);

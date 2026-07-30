@@ -1,6 +1,6 @@
 package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
-import com.wajunkai.sistemaEstoque.domain.exceptions.UsuarioNaoEncontradoException;
+import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.BuscarUsuarioPorIdUseCase;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
@@ -16,6 +16,6 @@ public class BuscarUsuarioPorIdService implements BuscarUsuarioPorIdUseCase {
     @Override
     public Usuario executar(Long id) {
         return usuarioRepositoryPort.buscarPorId(id)
-                .orElseThrow(() -> new UsuarioNaoEncontradoException("Usuário não encontrado para o ID: " + id));
+                .orElseThrow(() -> new EntidadeNaoEncontradoException("Usuário não encontrado para o ID: " + id));
     }
 }
