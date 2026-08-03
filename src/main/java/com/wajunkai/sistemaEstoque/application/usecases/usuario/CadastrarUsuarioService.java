@@ -7,7 +7,9 @@ import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.CadastrarUs
 import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
 
         private final UsuarioRepositoryPort usuarioRepository;

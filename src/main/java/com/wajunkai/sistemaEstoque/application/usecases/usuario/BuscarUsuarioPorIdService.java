@@ -4,7 +4,9 @@ import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoExcept
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.BuscarUsuarioPorIdUseCase;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BuscarUsuarioPorIdService implements BuscarUsuarioPorIdUseCase {
 
     private final UsuarioRepositoryPort usuarioRepositoryPort;

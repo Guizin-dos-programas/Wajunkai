@@ -8,10 +8,12 @@ import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
 import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeJaCadastradaException;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Service
 public class CadastrarProdutoService implements CadastrarProdutoUsecase {
 
     private final ProdutoRepositoryPort produtoRepositoryPort;

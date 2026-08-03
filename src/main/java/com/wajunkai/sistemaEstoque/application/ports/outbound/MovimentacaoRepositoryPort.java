@@ -1,11 +1,15 @@
 package com.wajunkai.sistemaEstoque.application.ports.outbound;
 
-import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaQuery;
-import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaResultado;
+import com.wajunkai.sistemaEstoque.application.dtos.movimentacao.PaginaQueryMovimentacao;
+import com.wajunkai.sistemaEstoque.application.dtos.movimentacao.PaginaResultadoMovimentacao;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
+
+import java.util.Optional;
 
 public interface MovimentacaoRepositoryPort {
 
     Movimentacao salvar(Movimentacao movimentacao);
-    PaginaResultado<Movimentacao> buscarPorProduto(Long produtoId, PaginaQuery query);
+    PaginaResultadoMovimentacao<Movimentacao> buscarPorProduto(Long produtoId, PaginaQueryMovimentacao query);
+    Optional<Movimentacao> buscarPorId(Long id);
+    PaginaResultadoMovimentacao<Movimentacao> buscarTodas(PaginaQueryMovimentacao query);
 }

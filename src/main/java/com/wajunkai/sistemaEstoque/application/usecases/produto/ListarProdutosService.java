@@ -6,7 +6,9 @@ import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.ListarProdu
 import com.wajunkai.sistemaEstoque.application.ports.outbound.ProdutoRepositoryPort;
 import com.wajunkai.sistemaEstoque.domain.enums.produto.Situacao;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ListarProdutosService implements ListarProdutosUsecase {
 
     private final ProdutoRepositoryPort produtoRepositoryPort;

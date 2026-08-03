@@ -8,10 +8,12 @@ import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeJaCadastradaExcepti
 import com.wajunkai.sistemaEstoque.domain.exceptions.RegraDeNegocioException;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Service
 public class AtualizarProdutoService implements AtualizarProdutoUsecase {
 
     private final ProdutoRepositoryPort produtoRepositoryPort;

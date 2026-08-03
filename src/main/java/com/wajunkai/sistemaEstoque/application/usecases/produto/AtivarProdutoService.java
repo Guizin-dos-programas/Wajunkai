@@ -4,7 +4,9 @@ import com.wajunkai.sistemaEstoque.application.ports.inbound.produto.AtivarProdu
 import com.wajunkai.sistemaEstoque.application.ports.outbound.ProdutoRepositoryPort;
 import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AtivarProdutoService implements AtivarProdutoUsecase {
 
     private final ProdutoRepositoryPort produtoRepositoryPort;

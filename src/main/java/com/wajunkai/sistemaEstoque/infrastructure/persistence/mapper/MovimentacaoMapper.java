@@ -3,6 +3,7 @@ package com.wajunkai.sistemaEstoque.infrastructure.persistence.mapper;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.entity.MovimentacaoJpaEntity;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.MovimentacaoResponse;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -41,4 +42,5 @@ public class MovimentacaoMapper {
                 entity.getResidenteNome()
         );
     }
+
 }
