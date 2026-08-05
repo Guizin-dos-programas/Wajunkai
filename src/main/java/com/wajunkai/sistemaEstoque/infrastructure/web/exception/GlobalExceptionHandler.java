@@ -90,6 +90,7 @@ public class GlobalExceptionHandler {
         problem.setType(URI.create("about:blank"));
         problem.setProperty("timestamp", Instant.now());
 
+        ex.printStackTrace();
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(problem);
     }
 

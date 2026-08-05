@@ -18,6 +18,7 @@ import java.io.ByteArrayOutputStream;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 @Component
 public class RelatorioPdfAdapter implements GerarRelatorioPdfPort {
@@ -91,10 +92,7 @@ public class RelatorioPdfAdapter implements GerarRelatorioPdfPort {
     }
 
     private String formatarMoeda(BigDecimal valor) {
-        if (valor == null) {
-            return MOEDA_BRL.format(BigDecimal.ZERO);
-        }
-        return MOEDA_BRL.format(valor);
+        return MOEDA_BRL.format(Objects.requireNonNullElse(valor, BigDecimal.ZERO));
     }
 
     private String formatarNomeCategoria(String categoria) {

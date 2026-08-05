@@ -8,6 +8,10 @@ import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.AtualizarProdutoRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.CadastrarProdutoRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.ProdutoResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +22,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/v1/produtos")
+@Tag(name = "Produtos", description = "Gerenciamento dos produtos do estoque")
 public class ProdutoController {
 
     private final CadastrarProdutoUsecase cadastrarProdutoUsecase;
@@ -37,6 +42,14 @@ public class ProdutoController {
     }
 
     @PostMapping
+    @Operation(
+            summary = "Cadastrar produto",
+            description = "Realiza o cadastro de um novo produto no estoque."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Produto cadastrado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados da requisição inválidos"),
+            @ApiResponse(responseCode = "409", description = "Já existe um produto com o mesmo nome")})
     public ResponseEntity<ProdutoResponse> cadastrar(@Valid @RequestBody CadastrarProdutoRequest cadastrarProdutoRequest){
 
         Produto produto = cadastrarProdutoUsecase.executar(
@@ -61,9 +74,18 @@ public class ProdutoController {
     }
 
     @PatchMapping("/{id}")
-    public ResponseEntity<ProdutoResponse> atualizarProduto(@Valid @RequestBody AtualizarProdutoRequest atualizarProdutoRequest){
+    @Operation(
+            summary = "Atualizar produto",
+            description = "Atualiza as informações de um produto."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Produto atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado")
+    })
+    public ResponseEntity<ProdutoResponse> atualizarProduto(@PathVariable Long id, @Valid @RequestBody AtualizarProdutoRequest atualizarProdutoRequest){
         Produto produtoAtualizado = atualizarProdutoUsecase.executar(
-                atualizarProdutoRequest.id(),
+                id,
                 atualizarProdutoRequest.nome(),
                 atualizarProdutoRequest.estoqueMinimo(),
                 atualizarProdutoRequest.unidadeMedida(),
@@ -75,12 +97,27 @@ public class ProdutoController {
     }
 
     @GetMapping("/{id}")
+    @Operation(
+            summary = "Buscar produto por ID",
+            description = "Retorna um produto pelo seu identificador."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Produto encontrado"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado")
+    })
     public ResponseEntity<ProdutoResponse> buscarPorId(@PathVariable Long id){
         Produto produtoId = buscarPorIdUsecase.executar(id);
         return ResponseEntity.ok(ProdutoResponse.fromDomain(produtoId));
     }
 
     @GetMapping
+    @Operation(
+            summary = "Listar produtos",
+            description = "Lista os produtos cadastrados com paginação e filtro opcional por situação."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Produtos listados com sucesso")
+    })
     public ResponseEntity<PaginaResultado<ProdutoResponse>> listarTodos(
             @RequestParam(defaultValue = "0") int pagina,
             @RequestParam(defaultValue = "10") int tamanho,
@@ -104,12 +141,28 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(
+            summary = "Desativar produto",
+            description = "Realiza a desativação lógica de um produto."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Produto desativado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado")
+    })
     public ResponseEntity<Void> desativarProduto(@PathVariable Long id){
         desativarProdutoUsecase.executar(id);
         return ResponseEntity.noContent().build();
     }
 
     @PatchMapping("/{id}/ativar")
+    @Operation(
+            summary = "Ativar produto",
+            description = "Ativa novamente um produto desativado."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Produto ativado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Produto não encontrado")
+    })
     public ResponseEntity<Void> ativarProduto(@PathVariable Long id){
         ativarProdutoUsecase.executar(id);
         return ResponseEntity.noContent().build();

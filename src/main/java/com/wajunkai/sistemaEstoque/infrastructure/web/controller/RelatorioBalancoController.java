@@ -3,6 +3,10 @@ package com.wajunkai.sistemaEstoque.infrastructure.web.controller;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.ExportarBalancoPdfUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.ObterBalancoDeCompraUsecase;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.BalancoComprasResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -16,6 +20,7 @@ import java.time.LocalDate;
 
 @RestController
 @RequestMapping("/v1/relatorio")
+@Tag(name = "Relatórios", description = "Operações relacionadas aos relatórios do sistema")
 public class RelatorioBalancoController {
 
     private final ObterBalancoDeCompraUsecase obterBalancoDeCompraUsecase;
@@ -27,6 +32,14 @@ public class RelatorioBalancoController {
     }
 
     @GetMapping
+    @Operation(
+            summary = "Consultar balanço de compras",
+            description = "Retorna o balanço de compras dentro de um período informado."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Balanço obtido com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Período informado é inválido")
+    })
     public ResponseEntity<BalancoComprasResponse> obterBalanco(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
@@ -36,6 +49,20 @@ public class RelatorioBalancoController {
     }
 
     @GetMapping(value = "/balanco/pdf", produces = MediaType.APPLICATION_PDF_VALUE)
+    @Operation(
+            summary = "Exportar balanço em PDF",
+            description = "Gera um relatório em PDF contendo o balanço de compras do período informado."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "PDF gerado com sucesso"
+            ),
+            @ApiResponse(
+                    responseCode = "400",
+                    description = "Período informado é inválido"
+            )
+    })
     public ResponseEntity<byte[]> exportarBalancoPdf(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim) {
