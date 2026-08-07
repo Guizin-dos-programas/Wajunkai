@@ -13,7 +13,7 @@ O projeto é estruturado separando estritamente a regra de negócio do ecossiste
 
 * **Domain (Domínio):** Contém as entidades principais, Value Objects (`Login`, etc.) e regras invariantes do sistema. Zero dependência do Spring.
 * **Application (Casos de Uso):** Contém as portas (Ports) de entrada/saída e serviços da aplicação.
-* **Infrastructure (Infraestrutura):** Implementação dos adaptadores (Adapters) para persistência (MariaDB/JPA), segurança (Spring Security / BCrypt) e Controllers REST.
+* **Infrastructure (Infraestrutura):** Implementação dos adaptadores (Adapters) para persistência (Postgresql/JPA), segurança (Spring Security / BCrypt) e Controllers REST.
 
 ---
 
@@ -25,6 +25,8 @@ O projeto é estruturado separando estritamente a regra de negócio do ecossiste
 * **Postgresql** (Banco de dados relacional)
 * **BCrypt** (Criptografia de senhas)
 * **Maven** (Gerenciamento de dependências)
+* **Junit** (Testes automatizados)
+* **Flyway** (Controle de versão do banco)
 
 ---
 
@@ -35,7 +37,6 @@ O projeto é estruturado separando estritamente a regra de negócio do ecossiste
 * Maven
 * Banco de dados postgresql rodando localmente
 
-### Passos
 
 ### Passos
 
@@ -43,3 +44,4 @@ O projeto é estruturado separando estritamente a regra de negócio do ecossiste
    ```bash
    git clone [https://github.com/Guizin-dos-programas/Wajunkai.git](https://github.com/Guizin-dos-programas/Wajunkai.git)
    cd Wajunkai
+   mvn spring-boot:run
