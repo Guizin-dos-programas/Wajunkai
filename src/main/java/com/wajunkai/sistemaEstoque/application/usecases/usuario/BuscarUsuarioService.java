@@ -7,11 +7,11 @@ import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryP
 import org.springframework.stereotype.Service;
 
 @Service
-public class BuscarUsuariosService implements BuscarUsuariosUsecase {
+public class BuscarUsuarioService implements BuscarUsuariosUsecase {
 
     private final UsuarioRepositoryPort usuarioRepositoryPort;
 
-    public BuscarUsuariosService(UsuarioRepositoryPort usuarioRepositoryPort) {
+    public BuscarUsuarioService(UsuarioRepositoryPort usuarioRepositoryPort) {
         this.usuarioRepositoryPort = usuarioRepositoryPort;
     }
 
