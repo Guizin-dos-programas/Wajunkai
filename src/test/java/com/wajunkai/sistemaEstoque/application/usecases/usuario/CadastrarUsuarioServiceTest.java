@@ -34,11 +34,14 @@ public class CadastrarUsuarioServiceTest {
     void deveCadastrarUsuarioSemErro(){
 
         Login login = new Login("roberto@gmail.com", null);
-        String senhaCriptografada = passwordEncoderPort.encode("12345");
+        String senhaCriptografada = "senha-criptografada";
+
+        when(passwordEncoderPort.encode("12345")).thenReturn(senhaCriptografada);
+
         Usuario usuario = new Usuario(
                 "Roberto",
                 login,
-                senhaCriptografada,
+                "12345",
                 TipoUsuario.ADMIN
         );
 
@@ -55,7 +58,12 @@ public class CadastrarUsuarioServiceTest {
         assertEquals(senhaCriptografada, resultado.getSenha());
         assertEquals(TipoUsuario.ADMIN, resultado.getTipoUsuario());
 
-        verify(usuarioRepositoryPort).salvar(usuarioSalvo);
+        verify(usuarioRepositoryPort).salvar(argThat(u ->
+                u.getNome().equals("Roberto") &&
+                        u.getLogin().equals(login) &&
+                        u.getSenha().equals(senhaCriptografada) &&
+                        u.getTipoUsuario() == TipoUsuario.ADMIN
+        ));
     }
 
 
@@ -63,7 +71,7 @@ public class CadastrarUsuarioServiceTest {
     @DisplayName("Se login já existir no banco dar erro")
     void darErroSeLoginCadastrado(){
         Login login = new Login("roberto@gmail.com", null);
-        String senhaCriptografada = passwordEncoderPort.encode("12345");
+        String senhaCriptografada = passwordEncoderPort.encode("senha-criptografada");
         Usuario usuario = new Usuario(
                 "Roberto",
                 login,

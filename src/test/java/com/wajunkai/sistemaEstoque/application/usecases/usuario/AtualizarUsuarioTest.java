@@ -3,7 +3,6 @@ package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPort;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
-import com.wajunkai.sistemaEstoque.domain.exceptions.CredenciaisInvalidasException;
 import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
@@ -84,6 +83,7 @@ public class AtualizarUsuarioTest {
 
         assertEquals("Usuário não encontrado", entidadeNaoEncontradoException.getMessage());
         verify(usuarioRepositoryPort).buscarPorId(1L);
+        verify(usuarioRepositoryPort, never()).salvar(any(Usuario.class));
     }
 
     @Test
