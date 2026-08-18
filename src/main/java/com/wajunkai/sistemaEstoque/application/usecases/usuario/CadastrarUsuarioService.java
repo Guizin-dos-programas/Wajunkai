@@ -9,6 +9,8 @@ import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryP
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
 
@@ -21,7 +23,7 @@ public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
         }
 
         @Override
-        public Usuario executar(String nome, String loginBruto, String senhaLimpa, TipoUsuario tipoUsuario) {
+        public Usuario executar(String nome, String loginBruto, String senhaLimpa, TipoUsuario tipoUsuario, String telefone, LocalDate dataNascimento) {
 
             Login loginVO = new Login(loginBruto, null);
 
@@ -33,7 +35,7 @@ public class CadastrarUsuarioService  implements CadastrarUsuarioUseCase {
 
             String senhaCriptografada = passwordEncoder.encode(senhaLimpa);
 
-            Usuario novoUsuario = new Usuario(nome, loginVO, senhaCriptografada, tipoUsuario);
+            Usuario novoUsuario = new Usuario(nome, loginVO, senhaCriptografada, tipoUsuario, dataNascimento, telefone);
 
             return usuarioRepository.salvar(novoUsuario);
         }

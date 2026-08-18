@@ -18,7 +18,9 @@ public class UsuarioMapper {
                 domain.getSenha(),
                 domain.getTipoUsuario(),
                 domain.isAtivo(),
-                domain.getDataCadastro()
+                domain.getDataCadastro(),
+                domain.getDataNascimento(),
+                domain.getTelefone()
         );
     }
 
@@ -33,6 +35,8 @@ public class UsuarioMapper {
                 loginVO,
                 entity.getSenha(),
                 entity.getTipoUsuario(),
+                entity.getDataNascimento(),
+                entity.getTelefone(),
                 entity.isAtivo(),
                 entity.getDataCadastro()
         );

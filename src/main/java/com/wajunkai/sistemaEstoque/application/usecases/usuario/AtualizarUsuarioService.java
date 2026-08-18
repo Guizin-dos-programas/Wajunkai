@@ -7,6 +7,8 @@ import com.wajunkai.sistemaEstoque.application.ports.outbound.PasswordEncoderPor
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+
 @Service
 public class AtualizarUsuarioService implements AtualizarUsuarioUsecase {
 
@@ -20,7 +22,7 @@ public class AtualizarUsuarioService implements AtualizarUsuarioUsecase {
 
 
     @Override
-    public Usuario executar(Long id, String nomeAtualizado, String novaSenha) {
+    public Usuario executar(Long id, String nomeAtualizado, String novaSenha, String telefone, LocalDate dataNascimento) {
         Usuario usuario = usuarioRepositoryPort.buscarPorId(id).orElseThrow(
                 ()-> new EntidadeNaoEncontradoException("Usuário não encontrado")
         );
@@ -31,7 +33,7 @@ public class AtualizarUsuarioService implements AtualizarUsuarioUsecase {
             senhaCriptografada = passwordEncoderPort.encode(novaSenha);
         }
 
-        usuario.atualizarDadosPessoais(nomeAtualizado, senhaCriptografada);
+        usuario.atualizarDadosPessoais(nomeAtualizado, senhaCriptografada, telefone, dataNascimento);
         return usuarioRepositoryPort.salvar(usuario);
     }
 }

@@ -54,7 +54,9 @@ public class UsuarioController {
                 request.nome(),
                 request.login(),
                 request.senha(),
-                request.tipoUsuario()
+                request.tipoUsuario(),
+                request.telefone(),
+                request.dataNascimento()
         );
 
         UsuarioResponse response = UsuarioResponse.fromDomain(usuarioCriado);
@@ -141,7 +143,9 @@ public class UsuarioController {
         Usuario usuarioAtualizado = atualizarUsuarioUsecase.executar(
                 id,
                 request.nomeAtualizado(),
-                request.senhaAtualizada()
+                request.senhaAtualizada(),
+                request.telefone(),
+                request.dataNascimento()
         );
 
         return ResponseEntity.ok(UsuarioResponse.fromDomain(usuarioAtualizado));

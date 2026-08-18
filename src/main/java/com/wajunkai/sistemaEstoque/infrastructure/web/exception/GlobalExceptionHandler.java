@@ -7,6 +7,7 @@ import com.wajunkai.sistemaEstoque.domain.exceptions.RegraDeNegocioException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ProblemDetail;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -76,6 +77,19 @@ public class GlobalExceptionHandler {
         problem.setType(URI.create("about:blank"));
         problem.setProperty("timestamp", Instant.now());
         problem.setProperty("camposErros", errosCampos);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ProblemDetail> handleHttpMessageNotReadable(HttpMessageNotReadableException ex) {
+        ProblemDetail problem = ProblemDetail.forStatusAndDetail(
+                HttpStatus.BAD_REQUEST,
+                "O corpo da requisição é inválido ou contém tipos incompatíveis (ex: formato de data incorreto). Verifique a estrutura enviada."
+        );
+        problem.setTitle("Requisição Ilegível");
+        problem.setType(URI.create("about:blank"));
+        problem.setProperty("timestamp", Instant.now());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(problem);
     }

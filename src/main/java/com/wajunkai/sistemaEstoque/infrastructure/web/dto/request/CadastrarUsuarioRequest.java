@@ -1,10 +1,10 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
+import java.time.LocalDate;
 
 public record CadastrarUsuarioRequest(
 
@@ -21,6 +21,13 @@ public record CadastrarUsuarioRequest(
         String senha,
 
         @NotNull(message = "O tipo do usuário é obrigatório.")
-        TipoUsuario tipoUsuario
+        TipoUsuario tipoUsuario,
+
+        @Pattern(regexp = "^\\d{2}9?\\d{8}$", message = "O telefone deve conter DDD e de 8 a 9 dígitos (apenas números).")
+        String telefone,
+
+        @Past(message = "A data de nascimento deve ser no passado.")
+        @JsonFormat(pattern = "yyyy-MM-dd")
+        LocalDate dataNascimento
 ) {
 }

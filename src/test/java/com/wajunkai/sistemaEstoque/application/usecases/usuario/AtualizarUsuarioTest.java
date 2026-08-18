@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -49,6 +50,8 @@ public class AtualizarUsuarioTest {
                 login,
                 "senha-criptografada",
                 TipoUsuario.ADMIN,
+                LocalDate.of(2007, 3, 29),
+                "44998576541",
                 true,
                 LocalDateTime.now()
         );
@@ -60,10 +63,16 @@ public class AtualizarUsuarioTest {
         Usuario resultado = atualizarUsuarioService.executar(
                 1L,
                 "Jorge Aragão",
-                "12345"
+                "12345",
+                "44998576541",
+                LocalDate.of(2007, 3, 29)
         );
 
+        LocalDate nasc = LocalDate.of(2007,3,29);
+
         assertEquals("Jorge Aragão",resultado.getNome());
+        assertEquals("44998576541", resultado.getTelefone());
+        assertEquals(nasc, resultado.getDataNascimento());
 
         verify(usuarioRepositoryPort).buscarPorId(1L);
         verify(passwordEncoderPort).encode("12345");
@@ -78,7 +87,7 @@ public class AtualizarUsuarioTest {
 
         EntidadeNaoEncontradoException entidadeNaoEncontradoException = assertThrows(
                 EntidadeNaoEncontradoException.class,
-                ()-> atualizarUsuarioService.executar(1L, "Jorge Aragão", "12345")
+                ()-> atualizarUsuarioService.executar(1L, "Jorge Aragão", "12345", "44998576541", LocalDate.of(2007, 3, 29))
         );
 
         assertEquals("Usuário não encontrado", entidadeNaoEncontradoException.getMessage());
@@ -99,6 +108,8 @@ public class AtualizarUsuarioTest {
                 login,
                 "senha-antiga",
                 TipoUsuario.ADMIN,
+                LocalDate.of(2007, 3, 29),
+                "44998576541",
                 true,
                 LocalDateTime.now()
         );
@@ -112,10 +123,16 @@ public class AtualizarUsuarioTest {
         Usuario resultado = atualizarUsuarioService.executar(
                 1L,
                 "Jorge Aragao",
-                null
+                null,
+                "44998576541",
+                LocalDate.of(2007, 3, 29)
         );
 
+        LocalDate nasc = LocalDate.of(2007, 3, 29);
+
         assertEquals("Jorge Aragao", resultado.getNome());
+        assertEquals("44998576541", resultado.getTelefone());
+        assertEquals(nasc, resultado.getDataNascimento());
 
         verify(usuarioRepositoryPort).buscarPorId(1L);
         verify(usuarioRepositoryPort).salvar(any(Usuario.class));

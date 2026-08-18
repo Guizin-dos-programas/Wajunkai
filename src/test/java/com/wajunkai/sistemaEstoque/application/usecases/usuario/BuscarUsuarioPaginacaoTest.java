@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -42,6 +43,8 @@ public class BuscarUsuarioPaginacaoTest {
                 new Login("joao", null),
                 "123",
                 TipoUsuario.FUNCIONARIO,
+                LocalDate.of(2007, 3, 29),
+                "44998576541",
                 true,
                 LocalDateTime.now()
         );
@@ -52,6 +55,8 @@ public class BuscarUsuarioPaginacaoTest {
                 new Login("maria", null),
                 "123",
                 TipoUsuario.FUNCIONARIO,
+                LocalDate.of(2007, 3, 29),
+                "44998576541",
                 true,
                 LocalDateTime.now()
         );

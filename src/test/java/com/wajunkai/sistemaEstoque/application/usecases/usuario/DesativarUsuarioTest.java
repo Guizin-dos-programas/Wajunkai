@@ -12,6 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -38,6 +39,8 @@ public class DesativarUsuarioTest {
                 new Login("anonimo", null),
                 "anonimo123",
                 TipoUsuario.FUNCIONARIO,
+                LocalDate.of(2007, 3, 29),
+                "44998576541",
                 true,
                 LocalDateTime.now()
         );
