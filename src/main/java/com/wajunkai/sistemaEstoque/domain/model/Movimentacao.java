@@ -7,6 +7,7 @@ import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Movimentacao {
 
@@ -94,5 +95,12 @@ public class Movimentacao {
 
     public String getResidenteNome() {
         return residenteNome;
+    }
+
+    private static final DateTimeFormatter FORMATO_DATA =
+            DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    public String getDataHoraFormatada() {
+        return dataHora != null ? dataHora.format(FORMATO_DATA) : "";
     }
 }

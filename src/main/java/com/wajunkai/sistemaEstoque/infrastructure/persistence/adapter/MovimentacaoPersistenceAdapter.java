@@ -2,9 +2,9 @@ package com.wajunkai.sistemaEstoque.infrastructure.persistence.adapter;
 
 import com.wajunkai.sistemaEstoque.application.dtos.movimentacao.PaginaQueryMovimentacao;
 import com.wajunkai.sistemaEstoque.application.dtos.movimentacao.PaginaResultadoMovimentacao;
-import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaQuery;
-import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaResultado;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.MovimentacaoRepositoryPort;
+import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoMovimentacao;
+import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoRelatorioCsv;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.entity.MovimentacaoJpaEntity;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.mapper.MovimentacaoMapper;
@@ -14,6 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -80,5 +81,21 @@ public class MovimentacaoPersistenceAdapter implements MovimentacaoRepositoryPor
                 page.getTotalElements(),
                 page.getTotalPages()
         );
+    }
+
+    @Override
+    public List<Movimentacao> buscarPorPeriodoETipo(LocalDateTime inicio, LocalDateTime fim, TipoRelatorioCsv tipoRelatorio) {
+        TipoMovimentacao tipoMovimentacao = switch (tipoRelatorio){
+            case DOACOES -> TipoMovimentacao.ENTRADA_DOACAO;
+            case COMPRAS -> TipoMovimentacao.ENTRADA_COMPRA;
+            case SAIDA_RESIDENTE -> TipoMovimentacao.SAIDA_CONSUMO;
+            case SAIDA_PERDA -> TipoMovimentacao.SAIDA_PERDA;
+            case GERAL -> null;
+        };
+
+        List<MovimentacaoJpaEntity> entities = springDataMovimentacaoRepository.buscarPorPeriodoETipo(inicio,fim,tipoMovimentacao);
+
+        return entities.stream()
+                .map(MovimentacaoMapper::toDomain).toList();
     }
 }

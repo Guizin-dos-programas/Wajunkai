@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnTransformer;
+import org.hibernate.annotations.JdbcType;
+import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -32,6 +34,7 @@ public class MovimentacaoJpaEntity {
     private Long usuarioId;
 
     @Enumerated(EnumType.STRING)
+    @JdbcType(PostgreSQLEnumJdbcType.class)
     @Column(name = "tipo_movimentacao", nullable = false)
     @ColumnTransformer(write = "?::tipo_movimentacao_enum")
     private TipoMovimentacao tipoMovimentacao;
