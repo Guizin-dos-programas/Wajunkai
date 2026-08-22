@@ -90,7 +90,8 @@ public class ProdutoController {
                 atualizarProdutoRequest.estoqueMinimo(),
                 atualizarProdutoRequest.unidadeMedida(),
                 atualizarProdutoRequest.categoria(),
-                atualizarProdutoRequest.dataValidade()
+                atualizarProdutoRequest.dataValidade(),
+                atualizarProdutoRequest.situacao()
         );
 
         return ResponseEntity.ok(ProdutoResponse.fromDomain(produtoAtualizado));

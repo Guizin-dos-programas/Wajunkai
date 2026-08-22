@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class MovimentacaoMapper {
 
-
     public MovimentacaoJpaEntity toEntity(Movimentacao domain){
         if (domain == null) return null;
 

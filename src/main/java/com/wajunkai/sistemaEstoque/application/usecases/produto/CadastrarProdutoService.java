@@ -29,10 +29,7 @@ public class CadastrarProdutoService implements CadastrarProdutoUsecase {
             throw new EntidadeJaCadastradaException("Produto: " + nome + " já cadastrado!");
         }
 
-        QuantidadeEstoque estoqueMinimoVO = new QuantidadeEstoque(estoqueMinimo);
-        QuantidadeEstoque quantidadeAtualVo = new QuantidadeEstoque(quantidadeAtual);
-
-        Produto produto = new Produto(nome, quantidadeAtualVo, estoqueMinimoVO, unidadeMedidaProduto, categoria, dataValidade, situacao);
+        Produto produto = new Produto(nome, QuantidadeEstoque.obrigatorio(quantidadeAtual), QuantidadeEstoque.obrigatorio(estoqueMinimo), unidadeMedidaProduto, categoria, dataValidade, situacao);
 
         return produtoRepositoryPort.salvar(produto);
     }

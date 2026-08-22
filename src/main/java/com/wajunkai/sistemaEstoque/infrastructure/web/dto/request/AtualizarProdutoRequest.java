@@ -1,6 +1,7 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request;
 
 import com.wajunkai.sistemaEstoque.domain.enums.produto.CategoriaProduto;
+import com.wajunkai.sistemaEstoque.domain.enums.produto.Situacao;
 import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
 import jakarta.validation.constraints.*;
 
@@ -23,6 +24,8 @@ public record AtualizarProdutoRequest(
         CategoriaProduto categoria,
 
         @FutureOrPresent(message = "A data de validade não pode ser uma data passada.")
-        LocalDate dataValidade
+        LocalDate dataValidade,
+
+        Situacao situacao
 ) {
 }

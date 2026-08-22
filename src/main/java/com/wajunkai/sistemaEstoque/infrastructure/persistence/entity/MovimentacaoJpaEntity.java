@@ -1,7 +1,6 @@
 package com.wajunkai.sistemaEstoque.infrastructure.persistence.entity;
 
 import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoMovimentacao;
-import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -56,4 +55,5 @@ public class MovimentacaoJpaEntity {
 
     @Column(name = "residente_nome", length = 100)
     private String residenteNome;
+
 }

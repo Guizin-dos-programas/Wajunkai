@@ -15,6 +15,7 @@ public interface AtualizarProdutoUsecase {
             BigDecimal estoqueMinimo,
             UnidadeMedidaProduto unidadeMedida,
             CategoriaProduto categoria,
-            LocalDate dataValidade
+            LocalDate dataValidade,
+            Situacao situacao
     );
 }

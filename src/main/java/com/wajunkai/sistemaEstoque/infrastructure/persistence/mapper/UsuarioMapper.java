@@ -1,6 +1,8 @@
 package com.wajunkai.sistemaEstoque.infrastructure.persistence.mapper;
 
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
+
+
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.entity.UsuarioJpaEntity;
 import org.springframework.stereotype.Component;

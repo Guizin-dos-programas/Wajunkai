@@ -59,18 +59,21 @@ public class Produto {
             QuantidadeEstoque novoEstoqueMinimo,
             UnidadeMedidaProduto novaUnidade,
             CategoriaProduto novaCategoria,
-            LocalDate novaValidade
+            LocalDate novaValidade,
+            Situacao situacaoAtualizada
     ) {
 
-        if (this.quantidadeAtual != null && novaUnidade != null) {
-            this.quantidadeAtual.validarUnidadeMedida(novaUnidade);
-        }
+        if(novoNome != null && !nome.isBlank()) this.nome = novoNome;
 
-        this.nome = novoNome;
-        this.estoqueMinimo = novoEstoqueMinimo;
-        this.unidadeMedidaProduto = novaUnidade;
-        this.categoriaProduto = novaCategoria;
-        this.dataValidade = novaValidade;
+        if(novoEstoqueMinimo != null) this.estoqueMinimo = novoEstoqueMinimo;
+
+        if(novaUnidade !=null) this.unidadeMedidaProduto = novaUnidade;
+
+        if(novaCategoria != null) this.categoriaProduto = novaCategoria;
+
+        if(novaValidade != null) this.dataValidade = novaValidade;
+
+        if(situacaoAtualizada != null) this.situacao = situacaoAtualizada;
     }
 
     public boolean precisaReposicao(){

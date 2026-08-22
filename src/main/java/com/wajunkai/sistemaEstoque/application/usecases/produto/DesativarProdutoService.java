@@ -19,7 +19,7 @@ public class DesativarProdutoService implements DesativarProdutoUsecase {
     @Override
     public Produto executar(Long id) {
         Produto produto = produtoRepositoryPort.buscarPorId(id)
-                .orElseThrow(()-> new EntidadeNaoEncontradoException("Produto não encontrado exception"));
+                .orElseThrow(()-> new EntidadeNaoEncontradoException("Produto não encontrado"));
 
         produto.inativarProduto();
 
