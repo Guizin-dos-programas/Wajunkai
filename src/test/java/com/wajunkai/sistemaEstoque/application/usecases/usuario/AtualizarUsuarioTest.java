@@ -87,7 +87,7 @@ public class AtualizarUsuarioTest {
 
         EntidadeNaoEncontradoException entidadeNaoEncontradoException = assertThrows(
                 EntidadeNaoEncontradoException.class,
-                ()-> atualizarUsuarioService.executar(1L, "Jorge Aragão", "12345", "44998576541", LocalDate.of(2007, 3, 29))
+                () -> atualizarUsuarioService.executar(1L, "Jorge Aragão", "12345", "44998576541", LocalDate.of(2007, 3, 29))
         );
 
         assertEquals("Usuário não encontrado", entidadeNaoEncontradoException.getMessage());
