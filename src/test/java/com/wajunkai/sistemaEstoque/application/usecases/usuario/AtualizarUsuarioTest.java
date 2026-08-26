@@ -65,7 +65,8 @@ public class AtualizarUsuarioTest {
                 "Jorge Aragão",
                 "12345",
                 "44998576541",
-                LocalDate.of(2007, 3, 29)
+                LocalDate.of(2007, 3, 29),
+                TipoUsuario.FUNCIONARIO
         );
 
         LocalDate nasc = LocalDate.of(2007,3,29);
@@ -87,7 +88,7 @@ public class AtualizarUsuarioTest {
 
         EntidadeNaoEncontradoException entidadeNaoEncontradoException = assertThrows(
                 EntidadeNaoEncontradoException.class,
-                () -> atualizarUsuarioService.executar(1L, "Jorge Aragão", "12345", "44998576541", LocalDate.of(2007, 3, 29))
+                () -> atualizarUsuarioService.executar(1L, "Jorge Aragão", "12345", "44998576541", LocalDate.of(2007, 3, 29), TipoUsuario.FUNCIONARIO)
         );
 
         assertEquals("Usuário não encontrado", entidadeNaoEncontradoException.getMessage());
@@ -125,7 +126,8 @@ public class AtualizarUsuarioTest {
                 "Jorge Aragao",
                 null,
                 "44998576541",
-                LocalDate.of(2007, 3, 29)
+                LocalDate.of(2007, 3, 29),
+                TipoUsuario.FUNCIONARIO
         );
 
         LocalDate nasc = LocalDate.of(2007, 3, 29);

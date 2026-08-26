@@ -3,6 +3,8 @@ package com.wajunkai.sistemaEstoque.infrastructure.web.controller;
 import com.wajunkai.sistemaEstoque.application.dtos.usuario.PaginaResultado;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.*;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
+import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.AtualizarMeusDadosRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.AtualizarUsuarioRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.CadastrarUsuarioRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.UsuarioResponse;
@@ -12,6 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
@@ -28,14 +32,16 @@ public class UsuarioController {
     private final BuscarUsuariosUsecase buscarUsuariosUsecase;
     private final AtualizarUsuarioUsecase atualizarUsuarioUsecase;
     private final DesativarUsuarioUsecase desativarUsuarioUsecase;
+    private final AtualizarMinhasCredenciaisUsecase atualizarMinhasCredenciaisUsecase;
 
-    public UsuarioController(CadastrarUsuarioUseCase cadastrarUsuarioUseCase, BuscarUsuarioPorLoginUsecase buscarUsuarioPorLoginUsecase, BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase, BuscarUsuariosUsecase buscarUsuariosUsecase, AtualizarUsuarioUsecase atualizarUsuarioUsecase, DesativarUsuarioUsecase desativarUsuarioUsecase) {
+    public UsuarioController(CadastrarUsuarioUseCase cadastrarUsuarioUseCase, BuscarUsuarioPorLoginUsecase buscarUsuarioPorLoginUsecase, BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase, BuscarUsuariosUsecase buscarUsuariosUsecase, AtualizarUsuarioUsecase atualizarUsuarioUsecase, DesativarUsuarioUsecase desativarUsuarioUsecase, AtualizarMinhasCredenciaisUsecase atualizarMinhasCredenciaisUsecase) {
         this.cadastrarUsuarioUseCase = cadastrarUsuarioUseCase;
         this.buscarUsuarioPorLoginUsecase = buscarUsuarioPorLoginUsecase;
         this.buscarUsuarioPorIdUseCase = buscarUsuarioPorIdUseCase;
         this.buscarUsuariosUsecase = buscarUsuariosUsecase;
         this.atualizarUsuarioUsecase = atualizarUsuarioUsecase;
         this.desativarUsuarioUsecase = desativarUsuarioUsecase;
+        this.atualizarMinhasCredenciaisUsecase = atualizarMinhasCredenciaisUsecase;
     }
 
     @PostMapping
@@ -145,8 +151,27 @@ public class UsuarioController {
                 request.nomeAtualizado(),
                 request.senhaAtualizada(),
                 request.telefone(),
-                request.dataNascimento()
+                request.dataNascimento(),
+                request.tipoUsuario()
         );
+
+        return ResponseEntity.ok(UsuarioResponse.fromDomain(usuarioAtualizado));
+    }
+
+    @PatchMapping("/me")
+    @Operation(
+            summary = "Atualizar meu perfil",
+            description = "Atualiza as informações do meu perfil."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Usuário atualizado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados da requisição inválidos"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    })
+    public ResponseEntity<UsuarioResponse> atualizarMeuPerfil(@AuthenticationPrincipal Usuario usuario, @Valid @RequestBody AtualizarMeusDadosRequest request) {
+
+        Login login = usuario.getLogin();
+        Usuario usuarioAtualizado = atualizarMinhasCredenciaisUsecase.executar(login, request);
 
         return ResponseEntity.ok(UsuarioResponse.fromDomain(usuarioAtualizado));
     }

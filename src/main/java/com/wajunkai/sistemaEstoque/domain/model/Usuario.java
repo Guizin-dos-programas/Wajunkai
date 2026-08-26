@@ -57,15 +57,27 @@ public class Usuario {
         return telefone;
     }
 
-    public void atualizarDadosPessoais(String novoNome, String novaSenhaCriptografada, String telefone, LocalDate dataNascimento) {
+    public void atualizarDadosPessoais(String novoNome, String novaSenhaCriptografada, String telefoneAtualizado, LocalDate dataNascimentoAtualizada, TipoUsuario tipoUsuarioAtualizado) {
 
         if (novoNome != null && !novoNome.isBlank()) this.nome = novoNome;
 
         if (novaSenhaCriptografada != null && !novaSenhaCriptografada.isBlank()) this.senha = novaSenhaCriptografada;
 
-        if(telefone!= null && !telefone.isBlank()) this.telefone = telefone;
+        if(telefoneAtualizado!= null && !telefoneAtualizado.isBlank()) this.telefone = telefoneAtualizado;
 
-        if(dataNascimento!= null) this.dataNascimento = dataNascimento;
+        if(dataNascimentoAtualizada!= null) this.dataNascimento = dataNascimentoAtualizada;
+
+        if(tipoUsuarioAtualizado!= null) this.tipoUsuario = tipoUsuarioAtualizado;
+    }
+
+    public void atualizarMeusDadosPessoais(String novoNome, String novaSenha, String telefoneAtualizado, LocalDate dataNascimentoAtualizada){
+        if (novoNome != null && !novoNome.isBlank()) this.nome = novoNome;
+
+        if (novaSenha != null && !novaSenha.isBlank()) this.senha = novaSenha;
+
+        if(telefoneAtualizado!= null && !telefoneAtualizado.isBlank()) this.telefone = telefoneAtualizado;
+
+        if(dataNascimentoAtualizada!= null) this.dataNascimento = dataNascimentoAtualizada;
     }
 
     public void desativarUsuario(){

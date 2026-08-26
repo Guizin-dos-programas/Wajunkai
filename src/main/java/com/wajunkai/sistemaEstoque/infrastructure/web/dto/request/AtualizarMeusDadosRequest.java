@@ -1,12 +1,11 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request;
 
-import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public record AtualizarUsuarioRequest(
+public record AtualizarMeusDadosRequest(
 
         @Size(min = 3, max = 100, message = "O nome deve ter entre 3 e 100 caracteres.")
         @Pattern(regexp = "^[a-zA-ZÀ-ÿ\\s]+$", message = "O nome deve conter apenas letras.")
@@ -18,8 +17,6 @@ public record AtualizarUsuarioRequest(
         @Pattern(regexp = "^\\d{2}9?\\d{8}$", message = "O telefone deve conter DDD e de 8 a 9 dígitos (apenas números).")
         String telefone,
 
-        LocalDate dataNascimento,
-
-        TipoUsuario tipoUsuario
+        LocalDate dataNascimento
 ) {
 }
