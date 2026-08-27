@@ -2,12 +2,9 @@ package com.wajunkai.sistemaEstoque.infrastructure.web.controller;
 
 import com.wajunkai.sistemaEstoque.application.dtos.movimentacao.PaginaQueryMovimentacao;
 import com.wajunkai.sistemaEstoque.application.dtos.movimentacao.PaginaResultadoMovimentacao;
-import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaQuery;
-import com.wajunkai.sistemaEstoque.application.dtos.produto.PaginaResultado;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.BuscarMovimentacaoPorIdUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.ListarMovimentacaoUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.RegistrarMovimentacaoUsecase;
-import com.wajunkai.sistemaEstoque.application.usecases.movimentacao.RegistrarMovimentacaoService;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.RegistrarMovimentacaoRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.MovimentacaoResponse;

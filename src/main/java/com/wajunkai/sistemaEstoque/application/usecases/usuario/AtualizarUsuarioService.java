@@ -1,5 +1,6 @@
 package com.wajunkai.sistemaEstoque.application.usecases.usuario;
 
+import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;
 import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.usuario.AtualizarUsuarioUsecase;
@@ -22,7 +23,7 @@ public class AtualizarUsuarioService implements AtualizarUsuarioUsecase {
 
 
     @Override
-    public Usuario executar(Long id, String nomeAtualizado, String novaSenha, String telefone, LocalDate dataNascimento) {
+    public Usuario executar(Long id, String nomeAtualizado, String novaSenha, String telefone, LocalDate dataNascimento, TipoUsuario tipoUsuario) {
         Usuario usuario = usuarioRepositoryPort.buscarPorId(id).orElseThrow(
                 ()-> new EntidadeNaoEncontradoException("Usuário não encontrado")
         );
@@ -33,7 +34,7 @@ public class AtualizarUsuarioService implements AtualizarUsuarioUsecase {
             senhaCriptografada = passwordEncoderPort.encode(novaSenha);
         }
 
-        usuario.atualizarDadosPessoais(nomeAtualizado, senhaCriptografada, telefone, dataNascimento);
+        usuario.atualizarDadosPessoais(nomeAtualizado, senhaCriptografada, telefone, dataNascimento, tipoUsuario);
         return usuarioRepositoryPort.salvar(usuario);
     }
 }

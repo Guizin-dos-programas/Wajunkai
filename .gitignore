@@ -72,3 +72,7 @@ build/
 .Trash-*
 Thumbs.db
 .DS_Store
+
+# Propriedades locais com credenciais
+src/main/resources/application-local.properties
+.env
