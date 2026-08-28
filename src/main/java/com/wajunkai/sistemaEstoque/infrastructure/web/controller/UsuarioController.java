@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 import java.util.List;
-
+import org.springframework.security.core.Authentication;
 @RestController
 @RequestMapping("/v1/usuarios")
 @Tag(name = "Usuários", description = "Operações relacionadas ao gerenciamento de usuários")
@@ -100,21 +100,21 @@ public class UsuarioController {
         return ResponseEntity.ok(respostaPaginada);
     }
 
-    @GetMapping("/me")
-    @Operation(
-            summary = "Buscar usuário autenticado",
-            description = "Retorna os dados do usuário autenticado."
-    )
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
-            @ApiResponse(responseCode = "401", description = "Usuário não autenticado")
-    })
-    public ResponseEntity<UsuarioResponse> buscarPorLogin(@RequestHeader("X-Usuario-Login") String loginDoUsuarioLogado) {
+   @GetMapping("/me")
+@Operation(
+        summary = "Buscar usuário autenticado",
+        description = "Retorna os dados do usuário autenticado."
+)
+@ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Usuário encontrado"),
+        @ApiResponse(responseCode = "401", description = "Usuário não autenticado")
+})
+public ResponseEntity<UsuarioResponse> buscarPorLogin(Authentication authentication) {
 
-        Usuario usuario = buscarUsuarioPorLoginUsecase.executar(loginDoUsuarioLogado);
-        return ResponseEntity.ok(UsuarioResponse.fromDomain(usuario));
-    }
+    Usuario usuario = (Usuario) authentication.getPrincipal();
 
+    return ResponseEntity.ok(UsuarioResponse.fromDomain(usuario));
+}
     @GetMapping("/{id}")
     @Operation(
             summary = "Buscar usuário por ID",
@@ -165,3 +165,4 @@ public class UsuarioController {
         return  ResponseEntity.noContent().build();
     }
 }
+

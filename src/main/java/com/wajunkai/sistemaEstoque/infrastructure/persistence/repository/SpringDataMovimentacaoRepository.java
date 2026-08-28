@@ -17,10 +17,14 @@ public interface SpringDataMovimentacaoRepository extends JpaRepository<Moviment
     Page<MovimentacaoJpaEntity> findByProdutoId(Long produtoId, Pageable pageable);
 
     @Query("""
-        SELECT m FROM MovimentacaoJpaEntity m
-        WHERE m.dataHora BETWEEN :inicio AND :fim
-        AND m.tipoMovimentacao = :tipo
-        ORDER BY m.dataHora DESC
-    """)
-    List<MovimentacaoJpaEntity> buscarPorPeriodoETipo(@Param("inicio") LocalDateTime inicio, @Param("fim") LocalDateTime fim, @Param("tipo") TipoMovimentacao tipo);
+    SELECT m FROM MovimentacaoJpaEntity m
+    WHERE m.dataHora BETWEEN :inicio AND :fim
+    AND (:tipo IS NULL OR m.tipoMovimentacao = :tipo)
+    ORDER BY m.dataHora DESC
+""")
+List<MovimentacaoJpaEntity> buscarPorPeriodoETipo(
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fim") LocalDateTime fim,
+            @Param("tipo") TipoMovimentacao tipo
+    );
 }
