@@ -21,18 +21,18 @@ public record MovimentacaoResponse(
         String residenteNome
 ) {
     public static MovimentacaoResponse fromDomain(Movimentacao domain) {
-        return new MovimentacaoResponse(
-                domain.getId(),
-                domain.getProduto().getId(),
-                domain.getProduto().getNome(),
-                domain.getUsuarioId(),
-                domain.getTipoMovimentacao(),
-                domain.getQuantidade().valor(),
-                domain.getDataHora(),
-                domain.getDoadorNome(),
-                domain.getCidade(),
-                domain.getValorCompra(),
-                domain.getResidenteNome()
-        );
-    }
+    return new MovimentacaoResponse(
+            domain.getId(),
+            domain.getProduto().getId(),
+            domain.getProduto().getNome(),
+            domain.getUsuarioId(),
+            domain.getTipoMovimentacao(),
+            domain.getQuantidade().valor(),
+            domain.getDataHora(),
+            domain.getDoadorNome(),
+            domain.getCidade(),
+            domain.getValorCompra(),
+            domain.getResidenteNome()
+    );
+}
 }

@@ -83,19 +83,34 @@ public class MovimentacaoPersistenceAdapter implements MovimentacaoRepositoryPor
         );
     }
 
-    @Override
-    public List<Movimentacao> buscarPorPeriodoETipo(LocalDateTime inicio, LocalDateTime fim, TipoRelatorioCsv tipoRelatorio) {
-        TipoMovimentacao tipoMovimentacao = switch (tipoRelatorio){
+  @Override
+public List<Movimentacao> buscarPorPeriodoETipo(
+        LocalDateTime inicio,
+        LocalDateTime fim,
+        TipoRelatorioCsv tipoRelatorio) {
+
+    List<MovimentacaoJpaEntity> entities;
+
+    if (tipoRelatorio == TipoRelatorioCsv.GERAL) {
+        entities = springDataMovimentacaoRepository.buscarPorPeriodo(inicio, fim);
+    } else {
+        TipoMovimentacao tipoMovimentacao = switch (tipoRelatorio) {
             case DOACOES -> TipoMovimentacao.ENTRADA_DOACAO;
             case COMPRAS -> TipoMovimentacao.ENTRADA_COMPRA;
             case SAIDA_RESIDENTE -> TipoMovimentacao.SAIDA_CONSUMO;
             case SAIDA_PERDA -> TipoMovimentacao.SAIDA_PERDA;
-            case GERAL -> null;
+            case GERAL -> throw new IllegalStateException("Tipo GERAL deve ser tratado separadamente");
         };
 
-        List<MovimentacaoJpaEntity> entities = springDataMovimentacaoRepository.buscarPorPeriodoETipo(inicio,fim,tipoMovimentacao);
-
-        return entities.stream()
-                .map(MovimentacaoMapper::toDomain).toList();
+        entities = springDataMovimentacaoRepository.buscarPorPeriodoETipo(
+                inicio,
+                fim,
+                tipoMovimentacao
+        );
     }
+
+    return entities.stream()
+            .map(MovimentacaoMapper::toDomain)
+            .toList();
+}
 }

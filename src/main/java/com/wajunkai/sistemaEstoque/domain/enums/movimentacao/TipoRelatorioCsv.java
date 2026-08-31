@@ -11,14 +11,7 @@ public enum TipoRelatorioCsv {
 
     DOACOES(List.of(
             coluna("Produto", movimentacao -> movimentacao.getProduto().getNome()),
-            coluna("Quantidade", movimentacao -> {
-                BigDecimal qtd = movimentacao.getQuantidade().valor(); // ou o método que retorna o BigDecimal
-                if (qtd == null) return "0";
-
-                return qtd.stripTrailingZeros()
-                        .toPlainString()
-                        .replace(".", ",");
-            }),
+            coluna("Quantidade", TipoRelatorioCsv::formatarQuantidade),
             coluna("Nome doador", Movimentacao::getDoadorNome),
             coluna("Cidade", Movimentacao::getCidade),
             coluna("Responsável", movimentacao -> movimentacao.getUsuarioId().toString()),
@@ -27,29 +20,19 @@ public enum TipoRelatorioCsv {
 
     COMPRAS(List.of(
             coluna("Produto", movimentacao -> movimentacao.getProduto().getNome()),
-            coluna("Quantidade", movimentacao -> {
-                BigDecimal qtd = movimentacao.getQuantidade().valor(); // ou o método que retorna o BigDecimal
-                if (qtd == null) return "0";
-
-                return qtd.stripTrailingZeros()
-                        .toPlainString()
-                        .replace(".", ",");
-            }),
-            coluna("Valor compra", movimentacao -> movimentacao.getValorCompra().toString()),
+            coluna("Quantidade", TipoRelatorioCsv::formatarQuantidade),
+            coluna("Valor compra", movimentacao ->
+                    movimentacao.getValorCompra() != null
+                            ? movimentacao.getValorCompra().toString()
+                            : ""
+            ),
             coluna("Responsável", movimentacao -> movimentacao.getUsuarioId().toString()),
             coluna("Data/hora", Movimentacao::getDataHoraFormatada)
     )),
 
     SAIDA_RESIDENTE(List.of(
             coluna("Produto", movimentacao -> movimentacao.getProduto().getNome()),
-            coluna("Quantidade", movimentacao -> {
-                BigDecimal qtd = movimentacao.getQuantidade().valor(); // ou o método que retorna o BigDecimal
-                if (qtd == null) return "0";
-
-                return qtd.stripTrailingZeros()
-                        .toPlainString()
-                        .replace(".", ",");
-            }),
+            coluna("Quantidade", TipoRelatorioCsv::formatarQuantidade),
             coluna("Residente", Movimentacao::getResidenteNome),
             coluna("Responsável", movimentacao -> movimentacao.getUsuarioId().toString()),
             coluna("Data/hora", Movimentacao::getDataHoraFormatada)
@@ -57,14 +40,7 @@ public enum TipoRelatorioCsv {
 
     SAIDA_PERDA(List.of(
             coluna("Produto", movimentacao -> movimentacao.getProduto().getNome()),
-            coluna("Quantidade", movimentacao -> {
-                BigDecimal qtd = movimentacao.getQuantidade().valor(); // ou o método que retorna o BigDecimal
-                if (qtd == null) return "0";
-
-                return qtd.stripTrailingZeros()
-                        .toPlainString()
-                        .replace(".", ",");
-            }),
+            coluna("Quantidade", TipoRelatorioCsv::formatarQuantidade),
             coluna("Responsável", movimentacao -> movimentacao.getUsuarioId().toString()),
             coluna("Data/hora", Movimentacao::getDataHoraFormatada)
     )),
@@ -73,23 +49,20 @@ public enum TipoRelatorioCsv {
             coluna("ID", movimentacao -> movimentacao.getId().toString()),
             coluna("Produto", movimentacao -> movimentacao.getProduto().getNome()),
             coluna("Tipo", movimentacao -> movimentacao.getTipoMovimentacao().name()),
-            coluna("Quantidade", movimentacao -> {
-                BigDecimal qtd = movimentacao.getQuantidade().valor(); // ou o método que retorna o BigDecimal
-                if (qtd == null) return "0";
-
-                return qtd.stripTrailingZeros()
-                        .toPlainString()
-                        .replace(".", ",");
-            }),
+            coluna("Quantidade", TipoRelatorioCsv::formatarQuantidade),
             coluna("Nome doador", Movimentacao::getDoadorNome),
             coluna("Cidade", Movimentacao::getCidade),
             coluna("Residente", Movimentacao::getResidenteNome),
-            coluna("Valor compra", movimentacao -> movimentacao.getValorCompra().toString()),
+            coluna("Valor compra", movimentacao ->
+                    movimentacao.getValorCompra() != null
+                            ? movimentacao.getValorCompra().toString()
+                            : ""
+            ),
             coluna("Responsável", movimentacao -> movimentacao.getUsuarioId().toString()),
             coluna("Data/hora", Movimentacao::getDataHoraFormatada)
     ));
 
-        private final List<ColunaCsv> colunas;
+    private final List<ColunaCsv> colunas;
 
     TipoRelatorioCsv(List<ColunaCsv> colunas) {
         this.colunas = colunas;
@@ -99,7 +72,23 @@ public enum TipoRelatorioCsv {
         return colunas;
     }
 
-    private static ColunaCsv coluna(String header, Function<Movimentacao, String> extrator) {
+    private static ColunaCsv coluna(
+            String header,
+            Function<Movimentacao, String> extrator) {
+
         return new ColunaCsv(header, extrator);
+    }
+
+    private static String formatarQuantidade(Movimentacao movimentacao) {
+        BigDecimal quantidade = movimentacao.getQuantidade().valor();
+
+        if (quantidade == null) {
+            return "0";
+        }
+
+        return quantidade
+                .stripTrailingZeros()
+                .toPlainString()
+                .replace(".", ",");
     }
 }

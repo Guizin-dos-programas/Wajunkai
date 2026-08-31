@@ -14,6 +14,7 @@ import java.util.List;
 
 @Repository
 public interface SpringDataMovimentacaoRepository extends JpaRepository<MovimentacaoJpaEntity, Long> {
+
     Page<MovimentacaoJpaEntity> findByProdutoId(Long produtoId, Pageable pageable);
 
     @Query("""
@@ -22,5 +23,19 @@ public interface SpringDataMovimentacaoRepository extends JpaRepository<Moviment
         AND m.tipoMovimentacao = :tipo
         ORDER BY m.dataHora DESC
     """)
-    List<MovimentacaoJpaEntity> buscarPorPeriodoETipo(@Param("inicio") LocalDateTime inicio, @Param("fim") LocalDateTime fim, @Param("tipo") TipoMovimentacao tipo);
+    List<MovimentacaoJpaEntity> buscarPorPeriodoETipo(
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fim") LocalDateTime fim,
+            @Param("tipo") TipoMovimentacao tipo
+    );
+
+    @Query("""
+        SELECT m FROM MovimentacaoJpaEntity m
+        WHERE m.dataHora BETWEEN :inicio AND :fim
+        ORDER BY m.dataHora DESC
+    """)
+    List<MovimentacaoJpaEntity> buscarPorPeriodo(
+            @Param("inicio") LocalDateTime inicio,
+            @Param("fim") LocalDateTime fim
+    );
 }
