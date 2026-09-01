@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Function;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -41,15 +42,16 @@ public class GerarRelatorioMovimentacaoCsvService implements ExportarCsvUsecase 
         List<Movimentacao> movimentacaoList =
                 movimentacaoRepositoryPort.buscarPorPeriodoETipo(inicio, fim, tipo);
 
-        Map<Long, String> nomesUsuarios = movimentacaoList.stream()
+        Set<Long> usuarioIds = movimentacaoList.stream()
                 .map(Movimentacao::getUsuarioId)
-                .distinct()
-                .collect(Collectors.toMap(
-                        Function.identity(),
-                        id -> usuarioRepositoryPort.buscarPorId(id)
-                                .map(usuario -> usuario.getNome())
-                                .orElse("Usuário não encontrado")
-                ));
+                .filter(Objects::nonNull)
+                .collect(Collectors.toSet());
+
+        Map<Long, String> nomesUsuarios = usuarioRepositoryPort.buscarNomesPorIds(usuarioIds);
+
+        if (movimentacaoList.isEmpty()) {
+            return gerarRelatorioCsvPort.executar(tipo, movimentacaoList, Map.of());
+        }
 
         return gerarRelatorioCsvPort.executar(
                 tipo,

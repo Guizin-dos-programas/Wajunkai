@@ -5,6 +5,7 @@ import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryPort;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.entity.UsuarioJpaEntity;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.mapper.UsuarioMapper;
+import com.wajunkai.sistemaEstoque.infrastructure.persistence.projection.UsuarioNomeProjection;
 import com.wajunkai.sistemaEstoque.infrastructure.persistence.repository.SpringDataUsuarioRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
@@ -14,7 +15,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class UsuarioPersistenceAdapter implements UsuarioRepositoryPort {
@@ -70,4 +74,17 @@ public class UsuarioPersistenceAdapter implements UsuarioRepositoryPort {
                 pageEntities.getTotalPages()
         );
     }
+
+    @Override
+    public Map<Long, String> buscarNomesPorIds(Set<Long> ids) {
+        if (ids.isEmpty()) return Map.of();
+
+        return repository.buscarNomesPorIds(ids).stream()
+                .collect(Collectors.toMap(
+                        UsuarioNomeProjection::getId,
+                        UsuarioNomeProjection::getNome
+                ));
+    }
+
+
 }
