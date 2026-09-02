@@ -30,22 +30,12 @@ public class RelatorioCsvAdapter implements GerarRelatorioCsvPort {
         String cabecalho = colunas.stream()
                 .map(ColunaCsv::getHeader)
                 .collect(Collectors.joining(SEPARADOR));
-
         csv.append(cabecalho).append("\n");
 
         for (Movimentacao m : movimentacoes) {
             String linha = colunas.stream()
-                    .map(coluna -> {
-
-                        if ("Responsável".equals(coluna.getHeader())) {
-                            String nomeUsuario = nomesUsuarios.get(m.getUsuarioId());
-                            return sanitizar(nomeUsuario);
-                        }
-
-                        return sanitizar(coluna.extrair(m));
-                    })
+                    .map(coluna -> sanitizar(coluna.extrair(m, nomesUsuarios)))
                     .collect(Collectors.joining(SEPARADOR));
-
             csv.append(linha).append("\n");
         }
 
@@ -54,13 +44,10 @@ public class RelatorioCsvAdapter implements GerarRelatorioCsvPort {
 
     private String sanitizar(String valor) {
         if (valor == null) return "";
-
         String limpo = valor.replace("\n", " ").replace("\r", " ");
-
         if (limpo.contains(SEPARADOR) || limpo.contains("\"")) {
             limpo = "\"" + limpo.replace("\"", "\"\"") + "\"";
         }
-
         return limpo;
     }
 }
