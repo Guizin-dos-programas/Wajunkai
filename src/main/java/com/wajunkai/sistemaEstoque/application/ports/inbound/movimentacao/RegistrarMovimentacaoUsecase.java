@@ -1,7 +1,7 @@
 package com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao;
 
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
-import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.RegistrarMovimentacaoRequest;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.movimentacao.RegistrarMovimentacaoRequest;
 
 public interface RegistrarMovimentacaoUsecase {
 

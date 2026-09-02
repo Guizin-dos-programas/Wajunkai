@@ -6,7 +6,7 @@ import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.Buscar
 import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.ListarMovimentacaoUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.movimentacao.RegistrarMovimentacaoUsecase;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
-import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.RegistrarMovimentacaoRequest;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.movimentacao.RegistrarMovimentacaoRequest;
 import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.MovimentacaoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

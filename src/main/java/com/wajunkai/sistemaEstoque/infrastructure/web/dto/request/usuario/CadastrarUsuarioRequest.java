@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request;
+package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.usuario;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.wajunkai.sistemaEstoque.domain.enums.usuario.TipoUsuario;

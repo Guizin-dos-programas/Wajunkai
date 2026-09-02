@@ -7,7 +7,7 @@ import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoExcept
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
-import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.RegistrarMovimentacaoRequest;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.movimentacao.RegistrarMovimentacaoRequest;
 import org.springframework.stereotype.Service;
 
 

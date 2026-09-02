@@ -48,6 +48,6 @@ public class JwtAdapter implements TokenServicePort {
     }
 
     private Instant gerarDataExpiracao(){
-        return Instant.now().plus(2, ChronoUnit.HOURS);
+        return Instant.now().plus(30, ChronoUnit.MINUTES);
     }
 }
