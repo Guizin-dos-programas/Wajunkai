@@ -1,8 +1,10 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.controller;
 
-import com.wajunkai.sistemaEstoque.application.dtos.auths.request.LoginRequest;
-import com.wajunkai.sistemaEstoque.application.dtos.auths.response.TokenResponse;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.usuario.LoginRequest;
+import com.wajunkai.sistemaEstoque.application.ports.inbound.autenticacao.AtualizarTokenUsecase;
 import com.wajunkai.sistemaEstoque.application.ports.inbound.autenticacao.AutenticarUsuarioUsecase;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.usuario.RefreshTokenRequest;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.TokenResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -20,9 +22,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AutenticarUsuarioUsecase autenticarUsuarioUsecase;
+    private final AtualizarTokenUsecase atualizarTokenUsecase;
 
-    public AuthController(AutenticarUsuarioUsecase autenticarUsuarioUsecase) {
+    public AuthController(AutenticarUsuarioUsecase autenticarUsuarioUsecase, AtualizarTokenUsecase atualizarTokenUsecase) {
         this.autenticarUsuarioUsecase = autenticarUsuarioUsecase;
+        this.atualizarTokenUsecase = atualizarTokenUsecase;
     }
 
     @PostMapping("/login")
@@ -35,5 +39,17 @@ public class AuthController {
     public ResponseEntity<TokenResponse> login(@RequestBody @Valid LoginRequest loginRequest){
         TokenResponse tokenResponse = autenticarUsuarioUsecase.executar(loginRequest);
         return ResponseEntity.ok(tokenResponse);
+    }
+
+    @PostMapping("/refresh")
+    @Operation(summary = "Refresh token", description = "Atualiza token do usuario logado")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Refresh realizado com sucesso"),
+            @ApiResponse(responseCode = "401", description = "Credenciais inválidas"),
+            @ApiResponse(responseCode = "400", description = "Dados da requisição inválidos")
+    })
+    public ResponseEntity<TokenResponse> refresh(@RequestBody @Valid RefreshTokenRequest request) {
+        TokenResponse response = atualizarTokenUsecase.executar(request.refreshToken());
+        return ResponseEntity.ok(response);
     }
 }

@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request;
+package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.movimentacao;
 
 import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoMovimentacao;
 import jakarta.validation.constraints.NotNull;

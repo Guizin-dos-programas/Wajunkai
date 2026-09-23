@@ -6,7 +6,7 @@ import com.wajunkai.sistemaEstoque.application.ports.outbound.UsuarioRepositoryP
 import com.wajunkai.sistemaEstoque.domain.exceptions.EntidadeNaoEncontradoException;
 import com.wajunkai.sistemaEstoque.domain.model.Usuario;
 import com.wajunkai.sistemaEstoque.domain.valueObject.Login;
-import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.AtualizarMeusDadosRequest;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.usuario.AtualizarMeusDadosRequest;
 import org.springframework.stereotype.Service;
 
 @Service

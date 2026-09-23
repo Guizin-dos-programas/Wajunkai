@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.application.dtos.auths.request;
+package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.usuario;
 
 import jakarta.validation.constraints.NotBlank;
 

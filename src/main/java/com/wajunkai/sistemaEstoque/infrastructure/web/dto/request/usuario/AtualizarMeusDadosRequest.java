@@ -1,4 +1,4 @@
-package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request;
+package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.usuario;
 
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;

@@ -1,7 +1,7 @@
 package com.wajunkai.sistemaEstoque.application.ports.inbound.autenticacao;
 
-import com.wajunkai.sistemaEstoque.application.dtos.auths.request.LoginRequest;
-import com.wajunkai.sistemaEstoque.application.dtos.auths.response.TokenResponse;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.usuario.LoginRequest;
+import com.wajunkai.sistemaEstoque.infrastructure.web.dto.response.TokenResponse;
 
 public interface AutenticarUsuarioUsecase {
 
