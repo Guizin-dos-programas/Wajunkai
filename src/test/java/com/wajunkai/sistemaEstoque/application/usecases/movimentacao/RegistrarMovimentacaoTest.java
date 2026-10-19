@@ -47,7 +47,8 @@ public class RegistrarMovimentacaoTest {
                 "Doador Exemplo",
                 "Maringá",
                 BigDecimal.valueOf(100.00),
-                "Residente Exemplo"
+                "Residente Exemplo",
+                null
         );
 
         Produto produtoMock = mock(Produto.class);
@@ -82,7 +83,8 @@ public class RegistrarMovimentacaoTest {
                 "Doador",
                 "Maringá",
                 BigDecimal.ZERO,
-                "Residente"
+                "Residente",
+                null
         );
 
         when(produtoRepositoryPort.buscarPorId(produtoIdInexistente)).thenReturn(Optional.empty());

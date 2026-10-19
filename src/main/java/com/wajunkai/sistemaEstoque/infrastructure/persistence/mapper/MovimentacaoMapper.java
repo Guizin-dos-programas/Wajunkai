@@ -21,7 +21,8 @@ public class MovimentacaoMapper {
                 domain.getDoadorNome(),
                 domain.getCidade(),
                 domain.getValorCompra(),
-                domain.getResidenteNome()
+                domain.getResidenteNome(),
+                domain.getDataValidade()
         );
     }
     public static Movimentacao toDomain(MovimentacaoJpaEntity entity){
@@ -37,7 +38,8 @@ public class MovimentacaoMapper {
                 entity.getDoadorNome(),
                 entity.getCidade(),
                 entity.getValorCompra(),
-                entity.getResidenteNome()
+                entity.getResidenteNome(),
+                entity.getDataValidade()
         );
     }
 

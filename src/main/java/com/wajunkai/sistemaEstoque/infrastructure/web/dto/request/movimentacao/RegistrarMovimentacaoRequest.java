@@ -1,10 +1,12 @@
 package com.wajunkai.sistemaEstoque.infrastructure.web.dto.request.movimentacao;
 
 import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoMovimentacao;
+import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 public record RegistrarMovimentacaoRequest(
 
@@ -20,10 +22,14 @@ public record RegistrarMovimentacaoRequest(
         @NotNull(message = "A quantidade é obrigatória.")
         @Positive(message = "A quantidade deve ser positiva.") BigDecimal quantidade,
 
+
         String doadorNome,
         String cidade,
         BigDecimal valorCompra,
-        String residenteNome
+        String residenteNome,
+
+        @FutureOrPresent(message = "A data de validade não pode ser uma data passada.")
+        LocalDate dataValidade
 
 ) {
 }

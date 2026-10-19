@@ -18,7 +18,6 @@ public class ProdutoMapper {
                 domain.getEstoqueMinimo().valor(),
                 domain.getUnidadeMedidaProduto(),
                 domain.getCategoriaProduto(),
-                domain.getDataValidade(),
                 domain.getSituacao()
         );
     }
@@ -33,7 +32,6 @@ public class ProdutoMapper {
                 new QuantidadeEstoque(entity.getEstoqueMinimo()),
                 entity.getUnidadeMedidaProduto(),
                 entity.getCategoriaProduto(),
-                entity.getDataValidade(),
                 entity.getSituacao()
         );
     }

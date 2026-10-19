@@ -11,7 +11,6 @@ import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Service
 public class CadastrarProdutoService implements CadastrarProdutoUsecase {
@@ -23,13 +22,13 @@ public class CadastrarProdutoService implements CadastrarProdutoUsecase {
     }
 
     @Override
-    public Produto executar(String nome, BigDecimal quantidadeAtual, BigDecimal estoqueMinimo, UnidadeMedidaProduto unidadeMedidaProduto, CategoriaProduto categoria, LocalDate dataValidade, Situacao situacao) {
+    public Produto executar(String nome, BigDecimal quantidadeAtual, BigDecimal estoqueMinimo, UnidadeMedidaProduto unidadeMedidaProduto, CategoriaProduto categoria, Situacao situacao) {
 
         if(produtoRepositoryPort.existePorNome(nome)){
             throw new EntidadeJaCadastradaException("Produto: " + nome + " já cadastrado!");
         }
 
-        Produto produto = new Produto(nome, QuantidadeEstoque.obrigatorio(quantidadeAtual), QuantidadeEstoque.obrigatorio(estoqueMinimo), unidadeMedidaProduto, categoria, dataValidade, situacao);
+        Produto produto = new Produto(nome, QuantidadeEstoque.obrigatorio(quantidadeAtual), QuantidadeEstoque.obrigatorio(estoqueMinimo), unidadeMedidaProduto, categoria, situacao);
 
         return produtoRepositoryPort.salvar(produto);
     }

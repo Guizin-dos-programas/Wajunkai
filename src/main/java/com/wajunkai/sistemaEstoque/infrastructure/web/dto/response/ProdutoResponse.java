@@ -6,7 +6,6 @@ import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 
-import java.time.LocalDate;
 
 public record ProdutoResponse(
 
@@ -16,8 +15,6 @@ public record ProdutoResponse(
         QuantidadeEstoque estoqueMinimo,
         UnidadeMedidaProduto unidadeMedidaProduto,
         CategoriaProduto categoriaProduto,
-        LocalDate dataValidade,
-        boolean estaVencido,
         boolean precisaReposicao,
         Situacao situacao
 
@@ -30,8 +27,6 @@ public record ProdutoResponse(
                 produto.getEstoqueMinimo(),
                 produto.getUnidadeMedidaProduto(),
                 produto.getCategoriaProduto(),
-                produto.getDataValidade(),
-                produto.estaVencido(),
                 produto.precisaReposicao(),
                 produto.getSituacao()
         );

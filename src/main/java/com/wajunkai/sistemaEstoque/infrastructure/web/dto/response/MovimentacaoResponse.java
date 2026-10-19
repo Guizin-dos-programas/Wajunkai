@@ -4,6 +4,7 @@ import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoMovimentacao;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public record MovimentacaoResponse(
@@ -18,7 +19,8 @@ public record MovimentacaoResponse(
         String doadorNome,
         String cidade,
         BigDecimal valorCompra,
-        String residenteNome
+        String residenteNome,
+        LocalDate dataValidade
 ) {
     public static MovimentacaoResponse fromDomain(Movimentacao domain) {
     return new MovimentacaoResponse(
@@ -32,7 +34,8 @@ public record MovimentacaoResponse(
             domain.getDoadorNome(),
             domain.getCidade(),
             domain.getValorCompra(),
-            domain.getResidenteNome()
+            domain.getResidenteNome(),
+            domain.getDataValidade()
     );
 }
 }

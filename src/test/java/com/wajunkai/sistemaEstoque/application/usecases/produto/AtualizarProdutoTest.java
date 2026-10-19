@@ -15,7 +15,6 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,7 +42,6 @@ public class AtualizarProdutoTest {
                 new QuantidadeEstoque(BigDecimal.valueOf(20)),
                 UnidadeMedidaProduto.UN,
                 CategoriaProduto.OUTROS,
-                null,
                 Situacao.ATIVO
         );
 
@@ -56,14 +54,12 @@ public class AtualizarProdutoTest {
                 BigDecimal.valueOf(10),
                 UnidadeMedidaProduto.UN,
                 CategoriaProduto.LIMPEZA,
-                LocalDate.of(2000, 2, 2),
                 Situacao.ATIVO
         );
 
         assertEquals("Vassoura", produtoAtualizado.getNome());
         assertEquals(new QuantidadeEstoque(BigDecimal.valueOf(10)), produtoAtualizado.getEstoqueMinimo());
         assertEquals(UnidadeMedidaProduto.UN, produtoAtualizado.getUnidadeMedidaProduto());
-        assertEquals(LocalDate.of(2000,2,2), produtoAtualizado.getDataValidade());
         assertEquals(Situacao.ATIVO, produtoAtualizado.getSituacao());
 
         verify(produtoRepositoryPort).buscarPorId(1L);
@@ -79,7 +75,7 @@ public class AtualizarProdutoTest {
 
         EntidadeNaoEncontradoException entidadeNaoEncontradoException = assertThrows(
                 EntidadeNaoEncontradoException.class,
-                ()-> atualizarProdutoService.executar(1L, "cabo", null, null, null, null, null));
+                ()-> atualizarProdutoService.executar(1L, "cabo", null, null, null, null));
 
         assertEquals("Produto não encontrado", entidadeNaoEncontradoException.getMessage());
         verify(produtoRepositoryPort).buscarPorId(1L);

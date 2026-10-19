@@ -12,7 +12,6 @@ import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Entity
 @Table(name = "tb_produto")
@@ -44,9 +43,6 @@ public class ProdutoJpaEntity {
     @Enumerated(EnumType.STRING)
     @Column(name = "categoria", nullable = false)
     private CategoriaProduto categoriaProduto;
-
-    @Column(nullable = true)
-    private LocalDate dataValidade;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "situacao", nullable = false)

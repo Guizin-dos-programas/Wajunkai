@@ -43,7 +43,6 @@ public class BuscarProdutosPaginacaoTest {
                 QuantidadeEstoque.obrigatorio(BigDecimal.valueOf(20)),
                 UnidadeMedidaProduto.KG,
                 CategoriaProduto.ALIMENTACAO,
-                LocalDate.of(2025, 6, 29),
                 Situacao.ATIVO
         );
 
@@ -54,7 +53,6 @@ public class BuscarProdutosPaginacaoTest {
                 QuantidadeEstoque.obrigatorio(BigDecimal.valueOf(20)),
                 UnidadeMedidaProduto.KG,
                 CategoriaProduto.ALIMENTACAO,
-                LocalDate.of(2025, 5, 29),
                 Situacao.ATIVO
         );
 

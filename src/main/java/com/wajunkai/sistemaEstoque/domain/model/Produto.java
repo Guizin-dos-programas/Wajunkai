@@ -8,7 +8,6 @@ import com.wajunkai.sistemaEstoque.domain.exceptions.RegraDeNegocioException;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public class Produto {
 
@@ -18,12 +17,11 @@ public class Produto {
     private QuantidadeEstoque estoqueMinimo;
     private UnidadeMedidaProduto unidadeMedidaProduto;
     private CategoriaProduto categoriaProduto;
-    private LocalDate dataValidade;
     private Situacao situacao;
 
     public Produto(){}
 
-    public Produto(String nome, QuantidadeEstoque quantidadeAtual, QuantidadeEstoque estoqueMinimo, UnidadeMedidaProduto unidadeMedidaProduto, CategoriaProduto categoriaProduto, LocalDate dataValidade, Situacao situacao) {
+    public Produto(String nome, QuantidadeEstoque quantidadeAtual, QuantidadeEstoque estoqueMinimo, UnidadeMedidaProduto unidadeMedidaProduto, CategoriaProduto categoriaProduto, Situacao situacao) {
 
         if (quantidadeAtual != null && unidadeMedidaProduto != null) {
             quantidadeAtual.validarUnidadeMedida(unidadeMedidaProduto);
@@ -34,11 +32,10 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
         this.unidadeMedidaProduto = unidadeMedidaProduto;
         this.categoriaProduto = categoriaProduto;
-        this.dataValidade = dataValidade;
         this.situacao = situacao != null ? situacao : Situacao.ATIVO;
     }
 
-    public Produto(Long id, String nome, QuantidadeEstoque quantidadeAtual, QuantidadeEstoque estoqueMinimo, UnidadeMedidaProduto unidadeMedidaProduto, CategoriaProduto categoriaProduto, LocalDate dataValidade, Situacao situacao) {
+    public Produto(Long id, String nome, QuantidadeEstoque quantidadeAtual, QuantidadeEstoque estoqueMinimo, UnidadeMedidaProduto unidadeMedidaProduto, CategoriaProduto categoriaProduto, Situacao situacao) {
 
         if (quantidadeAtual != null && unidadeMedidaProduto != null) {
             quantidadeAtual.validarUnidadeMedida(unidadeMedidaProduto);
@@ -50,7 +47,6 @@ public class Produto {
         this.estoqueMinimo = estoqueMinimo;
         this.unidadeMedidaProduto = unidadeMedidaProduto;
         this.categoriaProduto = categoriaProduto;
-        this.dataValidade = dataValidade;
         this.situacao = situacao != null ? situacao : Situacao.ATIVO;
     }
 
@@ -59,7 +55,6 @@ public class Produto {
             QuantidadeEstoque novoEstoqueMinimo,
             UnidadeMedidaProduto novaUnidade,
             CategoriaProduto novaCategoria,
-            LocalDate novaValidade,
             Situacao situacaoAtualizada
     ) {
 
@@ -71,8 +66,6 @@ public class Produto {
 
         if(novaCategoria != null) this.categoriaProduto = novaCategoria;
 
-        if(novaValidade != null) this.dataValidade = novaValidade;
-
         if(situacaoAtualizada != null) this.situacao = situacaoAtualizada;
     }
 
@@ -80,9 +73,6 @@ public class Produto {
         return quantidadeAtual.eMenorQue(estoqueMinimo);
     }
 
-    public boolean estaVencido(){
-        return dataValidade.isBefore(LocalDate.now());
-    }
 
     public void inativarProduto(){
         this.situacao = Situacao.INATIVO;
@@ -156,8 +146,6 @@ public class Produto {
     public CategoriaProduto getCategoriaProduto() {
         return categoriaProduto;
     }
-    public LocalDate getDataValidade() {
-        return dataValidade;
-    }
     public Situacao getSituacao() {return situacao;}
+
 }
