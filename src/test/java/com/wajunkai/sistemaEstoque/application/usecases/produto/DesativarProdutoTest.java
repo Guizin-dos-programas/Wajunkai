@@ -38,7 +38,6 @@ public class DesativarProdutoTest {
                 null,
                 null,
                 null,
-                null,
                 Situacao.ATIVO
         );
         when(produtoRepositoryPort.buscarPorId(1L)).thenReturn(Optional.of(produtoExistente));

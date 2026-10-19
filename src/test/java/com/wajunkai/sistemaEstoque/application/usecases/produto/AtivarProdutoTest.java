@@ -38,7 +38,6 @@ public class AtivarProdutoTest {
                 null,
                 null,
                 null,
-                null,
                 Situacao.INATIVO
         );
         when(produtoRepositoryPort.buscarPorId(1L)).thenReturn(Optional.of(produtoExistente));

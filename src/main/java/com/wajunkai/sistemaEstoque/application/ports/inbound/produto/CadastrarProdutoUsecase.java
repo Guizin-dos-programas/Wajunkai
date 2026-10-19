@@ -6,7 +6,6 @@ import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
 import com.wajunkai.sistemaEstoque.domain.model.Produto;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public interface CadastrarProdutoUsecase {
 
@@ -16,7 +15,6 @@ public interface CadastrarProdutoUsecase {
             BigDecimal estoqueMinimo,
             UnidadeMedidaProduto unidadeMedidaProduto,
             CategoriaProduto categoria,
-            LocalDate dataValidade,
             Situacao situacao
     );
 

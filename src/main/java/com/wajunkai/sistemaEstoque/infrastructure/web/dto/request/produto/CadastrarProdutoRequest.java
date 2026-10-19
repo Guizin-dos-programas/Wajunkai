@@ -6,7 +6,6 @@ import com.wajunkai.sistemaEstoque.domain.enums.produto.UnidadeMedidaProduto;
 import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 public record CadastrarProdutoRequest(
 
@@ -27,9 +26,6 @@ public record CadastrarProdutoRequest(
 
         @NotNull(message = "A categoria do produto é obrigatória.")
         CategoriaProduto categoria,
-
-        @FutureOrPresent(message = "A data de validade não pode ser uma data passada.")
-        LocalDate dataValidade,
 
         Situacao situacao
 ) {

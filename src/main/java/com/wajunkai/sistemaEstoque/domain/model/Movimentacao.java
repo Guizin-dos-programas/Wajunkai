@@ -5,6 +5,7 @@ import com.wajunkai.sistemaEstoque.domain.exceptions.RegraDeNegocioException;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -20,10 +21,11 @@ public class Movimentacao {
     private String cidade;
     private BigDecimal valorCompra;
     private String residenteNome;
+    private LocalDate dataValidade;
 
-    public Movimentacao(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao, QuantidadeEstoque quantidade, LocalDateTime dataHora, String doadorNome, String cidade, BigDecimal valorCompra, String residenteNome) {
+    public Movimentacao(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao, QuantidadeEstoque quantidade, LocalDateTime dataHora, String doadorNome, String cidade, BigDecimal valorCompra, String residenteNome, LocalDate dataValidade) {
 
-        validar(produto, usuarioId, tipoMovimentacao, quantidade, valorCompra, residenteNome);
+        validar(produto, usuarioId, tipoMovimentacao, quantidade, valorCompra, residenteNome, dataValidade);
 
         this.id = id;
         this.produto = produto;
@@ -35,10 +37,11 @@ public class Movimentacao {
         this.cidade = cidade;
         this.valorCompra = valorCompra;
         this.residenteNome = residenteNome;
+        this.dataValidade = dataValidade;
     }
 
     public void validar(Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao,
-                        QuantidadeEstoque quantidade, BigDecimal valorCompra, String residenteNome){
+                        QuantidadeEstoque quantidade, BigDecimal valorCompra, String residenteNome, LocalDate dataValidade){
 
         if (produto == null) throw new RegraDeNegocioException("A movimentação precisa estar vinculada a um produto");
 
@@ -49,6 +52,12 @@ public class Movimentacao {
         if (tipoMovimentacao == null) throw new RegraDeNegocioException("O tipo de movimentação é obrigatório.");
 
         if (quantidade == null || quantidade.valor().compareTo(BigDecimal.ZERO) <= 0) throw new RegraDeNegocioException("A quantidade movimentada deve ser maior que zero.");
+
+        if (dataValidade != null && dataValidade.isBefore(LocalDate.now())) {
+            throw new RegraDeNegocioException(
+                    "A data de validade não pode estar no passado."
+            );
+        }
 
         if (TipoMovimentacao.ENTRADA_COMPRA.equals(tipoMovimentacao) && (valorCompra == null || valorCompra.compareTo(BigDecimal.ZERO) <= 0)) throw new RegraDeNegocioException("Para movimentações de compra, o valor de compra deve ser informado e maior que zero.");
 
@@ -94,6 +103,9 @@ public class Movimentacao {
 
     public String getResidenteNome() {
         return residenteNome;
+    }
+
+    public LocalDate getDataValidade() {return dataValidade;
     }
 
     private static final DateTimeFormatter FORMATO_DATA =

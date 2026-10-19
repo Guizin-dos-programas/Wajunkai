@@ -12,7 +12,6 @@ import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 
 @Service
 public class AtualizarProdutoService implements AtualizarProdutoUsecase {
@@ -24,7 +23,7 @@ public class AtualizarProdutoService implements AtualizarProdutoUsecase {
     }
 
     @Override
-    public Produto executar(Long id, String nome, BigDecimal estoqueMinimo, UnidadeMedidaProduto unidadeMedida, CategoriaProduto categoria, LocalDate dataValidade, Situacao situacao) {
+    public Produto executar(Long id, String nome, BigDecimal estoqueMinimo, UnidadeMedidaProduto unidadeMedida, CategoriaProduto categoria, Situacao situacao) {
         Produto produtoExistente = produtoRepositoryPort.buscarPorId(id).orElseThrow(
                 ()-> new EntidadeNaoEncontradoException("Produto não encontrado"));
 
@@ -38,7 +37,6 @@ public class AtualizarProdutoService implements AtualizarProdutoUsecase {
                 QuantidadeEstoque.opcional(estoqueMinimo).orElse(null),
                 unidadeMedida,
                 categoria,
-                dataValidade,
                 situacao
 
         );

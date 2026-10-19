@@ -58,7 +58,6 @@ public class ProdutoController {
                 cadastrarProdutoRequest.estoqueMinimo(),
                 cadastrarProdutoRequest.unidadeMedida(),
                 cadastrarProdutoRequest.categoria(),
-                cadastrarProdutoRequest.dataValidade(),
                 cadastrarProdutoRequest.situacao()
         );
 
@@ -90,7 +89,6 @@ public class ProdutoController {
                 atualizarProdutoRequest.estoqueMinimo(),
                 atualizarProdutoRequest.unidadeMedida(),
                 atualizarProdutoRequest.categoria(),
-                atualizarProdutoRequest.dataValidade(),
                 atualizarProdutoRequest.situacao()
         );
 

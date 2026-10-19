@@ -40,7 +40,6 @@ public class CadastrarProdutoTest {
                 new QuantidadeEstoque(BigDecimal.valueOf(10)),
                 UnidadeMedidaProduto.L,
                 CategoriaProduto.ALIMENTACAO,
-                null,
                 Situacao.ATIVO
         );
 
@@ -51,7 +50,7 @@ public class CadastrarProdutoTest {
                 produto.getQuantidadeAtual().valor(),
                 produto.getEstoqueMinimo().valor(),
                 produto.getUnidadeMedidaProduto(),
-                produto.getCategoriaProduto(),produto.getDataValidade(),
+                produto.getCategoriaProduto(),
                 produto.getSituacao());
 
         assertNotNull(resultado);
@@ -60,7 +59,6 @@ public class CadastrarProdutoTest {
         assertEquals(BigDecimal.valueOf(10), resultado.getEstoqueMinimo().valor());
         assertEquals(UnidadeMedidaProduto.L, resultado.getUnidadeMedidaProduto());
         assertEquals(CategoriaProduto.ALIMENTACAO, resultado.getCategoriaProduto());
-        assertNull(resultado.getDataValidade());
         assertEquals(Situacao.ATIVO, resultado.getSituacao());
 
         verify(produtoRepositoryPort).salvar(argThat(p ->
@@ -69,7 +67,6 @@ public class CadastrarProdutoTest {
                         p.getEstoqueMinimo().valor().equals(BigDecimal.valueOf(10)) &&
                         p.getUnidadeMedidaProduto() == UnidadeMedidaProduto.L &&
                         p.getCategoriaProduto() == CategoriaProduto.ALIMENTACAO &&
-                        p.getDataValidade() == null &&
                         p.getSituacao() == Situacao.ATIVO
         ));
     }
@@ -89,7 +86,6 @@ public class CadastrarProdutoTest {
                         BigDecimal.valueOf(10),
                         UnidadeMedidaProduto.L,
                         CategoriaProduto.ALIMENTACAO,
-                        null,
                         Situacao.ATIVO
                 )
         );

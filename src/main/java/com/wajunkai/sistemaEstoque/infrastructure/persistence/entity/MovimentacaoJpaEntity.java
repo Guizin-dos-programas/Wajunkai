@@ -11,6 +11,7 @@ import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -55,5 +56,8 @@ public class MovimentacaoJpaEntity {
 
     @Column(name = "residente_nome", length = 100)
     private String residenteNome;
+
+    @Column(name = "data_validade")
+    private LocalDate dataValidade;
 
 }

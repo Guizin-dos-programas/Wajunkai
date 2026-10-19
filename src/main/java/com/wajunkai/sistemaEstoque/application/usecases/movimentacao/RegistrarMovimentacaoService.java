@@ -46,7 +46,8 @@ public class RegistrarMovimentacaoService implements RegistrarMovimentacaoUsecas
                 request.doadorNome(),
                 request.cidade(),
                 request.valorCompra(),
-                request.residenteNome()
+                request.residenteNome(),
+                request.dataValidade()
         );
 
         return movimentacaoRepositoryPort.salvar(movimentacao);
