@@ -32,7 +32,7 @@ public class Movimentacao {
         this.usuarioId = usuarioId;
         this.tipoMovimentacao = tipoMovimentacao;
         this.quantidade = quantidade;
-        this.dataHora = dataHora;
+        this.dataHora = LocalDateTime.now();
         this.doadorNome = doadorNome;
         this.cidade = cidade;
         this.valorCompra = valorCompra;
