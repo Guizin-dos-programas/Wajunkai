@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,7 +44,7 @@ class ListarMovimentacaoTest {
         when(movimentacaoMock.getId()).thenReturn(1L);
         when(movimentacaoMock.getProduto()).thenReturn(produtoMock);
         when(movimentacaoMock.getQuantidade()).thenReturn(quantidadeMock);
-        when(movimentacaoMock.getDataHora()).thenReturn(LocalDateTime.now());
+        when(movimentacaoMock.getDataHora()).thenReturn(Instant.now());
 
         return movimentacaoMock;
     }

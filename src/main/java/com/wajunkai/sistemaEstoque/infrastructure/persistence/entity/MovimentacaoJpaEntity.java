@@ -11,8 +11,8 @@ import org.hibernate.annotations.JdbcType;
 import org.hibernate.dialect.PostgreSQLEnumJdbcType;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "movimentacao")
@@ -43,7 +43,7 @@ public class MovimentacaoJpaEntity {
     private BigDecimal quantidade;
 
     @Column(name = "data_hora")
-    private LocalDateTime dataHora;
+    private Instant dataHora;
 
     @Column(name = "doador_nome", length = 100)
     private String doadorNome;
