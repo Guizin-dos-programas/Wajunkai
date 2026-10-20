@@ -4,8 +4,8 @@ import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoMovimentacao;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public record MovimentacaoResponse(
 
@@ -15,7 +15,7 @@ public record MovimentacaoResponse(
         Long usuarioId,
         TipoMovimentacao tipoMovimentacao,
         BigDecimal quantidade,
-        LocalDateTime dataHora,
+        Instant dataHora,
         String doadorNome,
         String cidade,
         BigDecimal valorCompra,

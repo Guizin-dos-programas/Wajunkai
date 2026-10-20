@@ -5,8 +5,9 @@ import com.wajunkai.sistemaEstoque.domain.exceptions.RegraDeNegocioException;
 import com.wajunkai.sistemaEstoque.domain.valueObject.QuantidadeEstoque;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class Movimentacao {
@@ -16,14 +17,14 @@ public class Movimentacao {
     private Long usuarioId;
     private TipoMovimentacao tipoMovimentacao;
     private QuantidadeEstoque quantidade;
-    private LocalDateTime dataHora;
+    private Instant dataHora;
     private String doadorNome;
     private String cidade;
     private BigDecimal valorCompra;
     private String residenteNome;
     private LocalDate dataValidade;
 
-    public Movimentacao(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao, QuantidadeEstoque quantidade, LocalDateTime dataHora, String doadorNome, String cidade, BigDecimal valorCompra, String residenteNome, LocalDate dataValidade) {
+    public Movimentacao(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao, QuantidadeEstoque quantidade, Instant dataHora, String doadorNome, String cidade, BigDecimal valorCompra, String residenteNome, LocalDate dataValidade) {
 
         validar(produto, usuarioId, tipoMovimentacao, quantidade, valorCompra, residenteNome, dataValidade);
 
@@ -32,7 +33,7 @@ public class Movimentacao {
         this.usuarioId = usuarioId;
         this.tipoMovimentacao = tipoMovimentacao;
         this.quantidade = quantidade;
-        this.dataHora = LocalDateTime.now();
+        this.dataHora = Instant.now();
         this.doadorNome = doadorNome;
         this.cidade = cidade;
         this.valorCompra = valorCompra;
@@ -85,7 +86,7 @@ public class Movimentacao {
         return quantidade;
     }
 
-    public LocalDateTime getDataHora() {
+    public Instant getDataHora() {
         return dataHora;
     }
 
@@ -112,6 +113,10 @@ public class Movimentacao {
             DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     public String getDataHoraFormatada() {
-        return dataHora != null ? dataHora.format(FORMATO_DATA) : "";
+        return dataHora != null
+                ? dataHora.atZone(ZoneId.of("America/Sao_Paulo"))
+                .format(FORMATO_DATA)
+                : "";
     }
+
 }
