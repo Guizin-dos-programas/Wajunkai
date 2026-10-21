@@ -33,7 +33,7 @@ public class Movimentacao {
         this.usuarioId = usuarioId;
         this.tipoMovimentacao = tipoMovimentacao;
         this.quantidade = quantidade;
-        this.dataHora = Instant.now();
+        this.dataHora = dataHora != null ? dataHora : Instant.now();
         this.doadorNome = doadorNome;
         this.cidade = cidade;
         this.valorCompra = valorCompra;
