@@ -9,7 +9,7 @@ import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -36,8 +36,8 @@ public class GerarRelatorioMovimentacaoCsvService implements ExportarCsvUsecase 
     @Override
     public byte[] executar(
             TipoRelatorioCsv tipo,
-            LocalDateTime inicio,
-            LocalDateTime fim) {
+            Instant inicio,
+            Instant fim) {
 
         List<Movimentacao> movimentacaoList =
                 movimentacaoRepositoryPort.buscarPorPeriodoETipo(inicio, fim, tipo);

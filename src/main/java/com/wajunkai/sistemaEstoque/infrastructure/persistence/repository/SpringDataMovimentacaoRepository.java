@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 
 @Repository
@@ -24,8 +24,8 @@ public interface SpringDataMovimentacaoRepository extends JpaRepository<Moviment
         ORDER BY m.dataHora DESC
     """)
     List<MovimentacaoJpaEntity> buscarPorPeriodoETipo(
-            @Param("inicio") LocalDateTime inicio,
-            @Param("fim") LocalDateTime fim,
+            @Param("inicio") Instant inicio,
+            @Param("fim") Instant fim,
             @Param("tipo") TipoMovimentacao tipo
     );
 
@@ -35,7 +35,7 @@ public interface SpringDataMovimentacaoRepository extends JpaRepository<Moviment
         ORDER BY m.dataHora DESC
     """)
     List<MovimentacaoJpaEntity> buscarPorPeriodo(
-            @Param("inicio") LocalDateTime inicio,
-            @Param("fim") LocalDateTime fim
+            @Param("inicio") Instant inicio,
+            @Param("fim") Instant fim
     );
 }

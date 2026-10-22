@@ -12,7 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -42,8 +43,8 @@ class GerarRelatorioMovimentacaoCsvTest {
     void deveGerarRelatorioCsvComSucesso() {
 
         TipoRelatorioCsv tipo = TipoRelatorioCsv.DOACOES;
-        LocalDateTime inicio = LocalDateTime.now().minusDays(7);
-        LocalDateTime fim = LocalDateTime.now();
+        Instant inicio = Instant.now().minus(7, ChronoUnit.DAYS);
+        Instant fim = Instant.now();
 
         Movimentacao movimentacaoMock = mock(Movimentacao.class);
         when(movimentacaoMock.getUsuarioId()).thenReturn(1L);
@@ -73,8 +74,8 @@ class GerarRelatorioMovimentacaoCsvTest {
     void deveGerarRelatorioCsvVazioQuandoNaoHouverMovimentacoes() {
 
         TipoRelatorioCsv tipo = TipoRelatorioCsv.SAIDA_RESIDENTE;
-        LocalDateTime inicio = LocalDateTime.now().minusDays(7);
-        LocalDateTime fim = LocalDateTime.now();
+        Instant inicio = Instant.now().minus(7, ChronoUnit.DAYS);
+        Instant fim = Instant.now();
 
         List<Movimentacao> movimentacoesVogais = List.of();
         byte[] bytesVazios = "cabecalho_vazio".getBytes();
