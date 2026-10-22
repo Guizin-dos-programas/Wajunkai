@@ -5,7 +5,7 @@ import com.wajunkai.sistemaEstoque.application.dtos.movimentacao.PaginaResultado
 import com.wajunkai.sistemaEstoque.domain.enums.movimentacao.TipoRelatorioCsv;
 import com.wajunkai.sistemaEstoque.domain.model.Movimentacao;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,5 +15,5 @@ public interface MovimentacaoRepositoryPort {
     PaginaResultadoMovimentacao<Movimentacao> buscarPorProduto(Long produtoId, PaginaQueryMovimentacao query);
     Optional<Movimentacao> buscarPorId(Long id);
     PaginaResultadoMovimentacao<Movimentacao> buscarTodas(PaginaQueryMovimentacao query);
-    List<Movimentacao> buscarPorPeriodoETipo(LocalDateTime inicio, LocalDateTime fim, TipoRelatorioCsv tipoRelatorio);
+    List<Movimentacao> buscarPorPeriodoETipo(Instant inicio, Instant fim, TipoRelatorioCsv tipoRelatorio);
 }

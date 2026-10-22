@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
+import java.time.*;
 
 @RestController
 @RequestMapping("v1/relatorios/movimentacoes")
@@ -41,8 +39,16 @@ public class GerarRelatorioCsvController {
                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataInicio,
                                                  @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate dataFim){
 
-        LocalDateTime inicio = dataInicio.atStartOfDay();
-        LocalDateTime fim = dataFim.atTime(LocalTime.MAX);
+        ZoneId zona = ZoneId.of("America/Sao_Paulo");
+
+        Instant inicio = dataInicio
+                .atStartOfDay(zona)
+                .toInstant();
+
+        Instant fim = dataFim
+                .plusDays(1)
+                .atStartOfDay(zona)
+                .toInstant();
 
         byte [] csv = exportarCsvUsecase.executar(tipo, inicio, fim);
         String nomeArquivo = String.format("relatorio_%s_%s.csv", tipo.name().toLowerCase(), LocalDate.now());

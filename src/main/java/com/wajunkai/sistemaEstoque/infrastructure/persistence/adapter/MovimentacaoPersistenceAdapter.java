@@ -14,7 +14,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -85,8 +85,8 @@ public class MovimentacaoPersistenceAdapter implements MovimentacaoRepositoryPor
 
   @Override
 public List<Movimentacao> buscarPorPeriodoETipo(
-        LocalDateTime inicio,
-        LocalDateTime fim,
+        Instant inicio,
+        Instant fim,
         TipoRelatorioCsv tipoRelatorio) {
 
     List<MovimentacaoJpaEntity> entities;
