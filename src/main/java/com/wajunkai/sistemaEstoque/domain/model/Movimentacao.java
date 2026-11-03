@@ -24,22 +24,38 @@ public class Movimentacao {
     private String residenteNome;
     private LocalDate dataValidade;
 
-    public Movimentacao(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao, QuantidadeEstoque quantidade, Instant dataHora, String doadorNome, String cidade, BigDecimal valorCompra, String residenteNome, LocalDate dataValidade) {
+    public Movimentacao(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao,
+                    QuantidadeEstoque quantidade, Instant dataHora, String doadorNome, String cidade,
+                    BigDecimal valorCompra, String residenteNome, LocalDate dataValidade){
+    this(id, produto, usuarioId, tipoMovimentacao, quantidade, dataHora, doadorNome, cidade,
+         valorCompra, residenteNome, dataValidade, true);
+}
 
+public static Movimentacao reconstituir(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao,
+                                        QuantidadeEstoque quantidade, Instant dataHora, String doadorNome, String cidade,
+                                        BigDecimal valorCompra, String residenteNome, LocalDate dataValidade) {
+    return new Movimentacao(id, produto, usuarioId, tipoMovimentacao, quantidade, dataHora, doadorNome, cidade,
+                            valorCompra, residenteNome, dataValidade, false);
+}
+
+private Movimentacao(Long id, Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao,
+                     QuantidadeEstoque quantidade, Instant dataHora, String doadorNome, String cidade,
+                     BigDecimal valorCompra, String residenteNome, LocalDate dataValidade, boolean validar) {
+    if (validar) {
         validar(produto, usuarioId, tipoMovimentacao, quantidade, valorCompra, residenteNome, dataValidade);
-
-        this.id = id;
-        this.produto = produto;
-        this.usuarioId = usuarioId;
-        this.tipoMovimentacao = tipoMovimentacao;
-        this.quantidade = quantidade;
-        this.dataHora = dataHora != null ? dataHora : Instant.now();
-        this.doadorNome = doadorNome;
-        this.cidade = cidade;
-        this.valorCompra = valorCompra;
-        this.residenteNome = residenteNome;
-        this.dataValidade = dataValidade;
     }
+    this.id = id;
+    this.produto = produto;
+    this.usuarioId = usuarioId;
+    this.tipoMovimentacao = tipoMovimentacao;
+    this.quantidade = quantidade;
+    this.dataHora = dataHora != null ? dataHora : Instant.now();
+    this.doadorNome = doadorNome;
+    this.cidade = cidade;
+    this.valorCompra = valorCompra;
+    this.residenteNome = residenteNome;
+    this.dataValidade = dataValidade;
+}
 
     public void validar(Produto produto, Long usuarioId, TipoMovimentacao tipoMovimentacao,
                         QuantidadeEstoque quantidade, BigDecimal valorCompra, String residenteNome, LocalDate dataValidade){
