@@ -28,7 +28,7 @@ public class MovimentacaoMapper {
     public static Movimentacao toDomain(MovimentacaoJpaEntity entity){
         if (entity == null) return  null;
 
-        return new Movimentacao(
+        return new Movimentacao.reconstituir(
                 entity.getId(),
                 new ProdutoMapper().toDomain(entity.getProduto()),
                 entity.getUsuarioId(),
