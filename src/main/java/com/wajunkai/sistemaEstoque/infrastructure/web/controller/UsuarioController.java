@@ -177,7 +177,7 @@ public class UsuarioController {
         return ResponseEntity.ok(UsuarioResponse.fromDomain(usuarioAtualizado));
     }
 
-    @DeleteMapping("/{id}")
+    @PatchMapping("/{id}/ativar")
     @Operation(
             summary = "ativar usuário",
             description = "Realiza a ativação lógica de um usuário."
