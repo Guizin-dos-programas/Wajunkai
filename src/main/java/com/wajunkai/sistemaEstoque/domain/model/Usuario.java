@@ -83,4 +83,7 @@ public class Usuario {
     public void desativarUsuario(){
         this.ativo = false;
     }
+    public void ativarUsuario(){
+        this.ativo = true;
+    }
 }

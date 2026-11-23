@@ -32,8 +32,9 @@ public class UsuarioController {
     private final AtualizarUsuarioUsecase atualizarUsuarioUsecase;
     private final DesativarUsuarioUsecase desativarUsuarioUsecase;
     private final AtualizarMinhasCredenciaisUsecase atualizarMinhasCredenciaisUsecase;
+    private final AtivarUsuarioUsecase ativarUsuarioUsecase;
 
-    public UsuarioController(CadastrarUsuarioUseCase cadastrarUsuarioUseCase, BuscarUsuarioPorLoginUsecase buscarUsuarioPorLoginUsecase, BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase, BuscarUsuariosUsecase buscarUsuariosUsecase, AtualizarUsuarioUsecase atualizarUsuarioUsecase, DesativarUsuarioUsecase desativarUsuarioUsecase, AtualizarMinhasCredenciaisUsecase atualizarMinhasCredenciaisUsecase) {
+    public UsuarioController(CadastrarUsuarioUseCase cadastrarUsuarioUseCase, BuscarUsuarioPorLoginUsecase buscarUsuarioPorLoginUsecase, BuscarUsuarioPorIdUseCase buscarUsuarioPorIdUseCase, BuscarUsuariosUsecase buscarUsuariosUsecase, AtualizarUsuarioUsecase atualizarUsuarioUsecase, DesativarUsuarioUsecase desativarUsuarioUsecase, AtualizarMinhasCredenciaisUsecase atualizarMinhasCredenciaisUsecase, AtivarUsuarioUsecase ativarUsuarioUsecase) {
         this.cadastrarUsuarioUseCase = cadastrarUsuarioUseCase;
         this.buscarUsuarioPorLoginUsecase = buscarUsuarioPorLoginUsecase;
         this.buscarUsuarioPorIdUseCase = buscarUsuarioPorIdUseCase;
@@ -41,6 +42,7 @@ public class UsuarioController {
         this.atualizarUsuarioUsecase = atualizarUsuarioUsecase;
         this.desativarUsuarioUsecase = desativarUsuarioUsecase;
         this.atualizarMinhasCredenciaisUsecase = atualizarMinhasCredenciaisUsecase;
+        this.ativarUsuarioUsecase = ativarUsuarioUsecase;
     }
 
     @PostMapping
@@ -173,6 +175,20 @@ public class UsuarioController {
         Usuario usuarioAtualizado = atualizarMinhasCredenciaisUsecase.executar(login, request);
 
         return ResponseEntity.ok(UsuarioResponse.fromDomain(usuarioAtualizado));
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(
+            summary = "ativar usuário",
+            description = "Realiza a ativação lógica de um usuário."
+    )
+    @ApiResponses({
+            @ApiResponse(responseCode = "204", description = "Usuário ativado com sucesso"),
+            @ApiResponse(responseCode = "404", description = "Usuário não encontrado")
+    })
+    public ResponseEntity<UsuarioResponse> ativarUsuario(@PathVariable Long id){
+        ativarUsuarioUsecase.executar(id);
+        return  ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("/{id}")
