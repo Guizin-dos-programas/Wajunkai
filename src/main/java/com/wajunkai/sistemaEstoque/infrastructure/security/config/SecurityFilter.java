@@ -37,11 +37,21 @@ public class SecurityFilter extends OncePerRequestFilter {
             var login = tokenServicePort.validarToken(token);
 
             if (login != null) {
+
+                long inicio = System.nanoTime();
+
                 Usuario usuario = usuarioRepositoryPort.buscarPorLogin(login)
                         .orElse(null);
 
+                long duracao = (System.nanoTime() - inicio) / 1_000_000;
+
+                System.out.println("Tempo de busca do usuário: " + duracao + " ms");
+
                 if (usuario != null) {
-                    var authentication = new UsernamePasswordAuthenticationToken(usuario, null, Collections.emptyList());
+                    var authentication = new UsernamePasswordAuthenticationToken(
+                            usuario, null, Collections.emptyList()
+                    );
+
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
